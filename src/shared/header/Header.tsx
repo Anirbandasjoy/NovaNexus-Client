@@ -20,10 +20,10 @@ const Header = () => {
   return (
     <div className="text-center mt-3">
       <img src={logo} className="mx-auto w-44 sm:w-72" alt="logo" />
-      <p className="sm:text-lg mt-3 text-gray-500">
+      <p className="sm:text-lg mt-3 text-gray-500 dark:text-gray-400">
         Journalism Without Fear or Favour
       </p>
-      <h1 className="sm:text-sm text-xs">{currentTime}</h1>
+      <h1 className="sm:text-sm text-xs dark:text-gray-300">{currentTime}</h1>
     </div>
   );
 };
