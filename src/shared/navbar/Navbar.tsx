@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ToggoleBtn from "../../components/toggleBtn/ToggleBtn";
 import { useState } from "react";
+import DropDown from "../../components/dropDown/DropDown";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -8,13 +9,14 @@ const Navbar = () => {
     <div className="mt-8">
       <div>
         <nav className="  ">
-          <div className=" flex  flex-wrap items-center justify-between mx-auto ">
+          <div className=" flex flex-wrap items-center justify-between mx-auto ">
             <ToggoleBtn />
             <div className="flex md:order-2 space-x-2 md:space-x-0 rtl:space-x-reverse">
               <div className="flex items-center justify-center gap-4 ">
-                <div className="font-bold uppercase bg-blue-600 h-10 cursor-pointer w-10 rounded-full text-sm flex justify-center items-center text-white">
+                <DropDown />
+                {/* <div className="font-bold uppercase bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
                   JD
-                </div>
+                </div> */}
                 <Link
                   to=""
                   type="button"
@@ -51,14 +53,14 @@ const Navbar = () => {
               </button>
             </div>
             <div
-              className={`items-center ml-0 sm:ml-[82px]  mt-4 sm:mt-0 justify-between duration-700 w-full md:flex md:w-auto ${
+              className={`items-center sm:ml-[82px] ml-0  mt-4 sm:mt-0 justify-between duration-700 w-full md:flex md:w-auto ${
                 open
                   ? "translate-x-0 "
                   : "-translate-x-[110%] sm:-translate-x-0"
               }`}
               id="navbar-sticky"
             >
-              <ul className="flex absolute sm:static w-full  sm:dark:bg-gray-900 flex-col p-4 md:p-0 font-medium  rounded-sm  border-gray-300 border sm:border-none dark:text-white dark:bg-gray-800   dark:border-gray-600 bg-gray-200 sm:bg-gray-200  md:space-x-8  md:flex-row md:mt-0  ">
+              <ul className="flex absolute sm:static w-full  sm:dark:bg-gray-900 flex-col p-4 md:p-0 font-medium  rounded-sm  border-gray-300 border sm:border-none dark:text-white dark:bg-gray-800   dark:border-gray-600 bg-gray-300 sm:bg-gray-200  md:space-x-8  md:flex-row md:mt-0  ">
                 <li>
                   <Link
                     to="/"
