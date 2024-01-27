@@ -8,16 +8,22 @@ const Navbar = () => {
     <div className="mt-8">
       <div>
         <nav className="  ">
-          <div className=" flex flex-wrap items-center justify-between mx-auto ">
+          <div className=" flex  flex-wrap items-center justify-between mx-auto ">
             <ToggoleBtn />
             <div className="flex md:order-2 space-x-2 md:space-x-0 rtl:space-x-reverse">
-              <Link
-                to=""
-                type="button"
-                className="text-white bg-[#d72050]   focus:outline-none  font-semibold rounded-sm text-sm px-4 py-2 text-center"
-              >
-                Login
-              </Link>
+              <div className="flex items-center justify-center gap-4 ">
+                <div className="font-bold uppercase bg-blue-600 h-10 cursor-pointer w-10 rounded-full text-sm flex justify-center items-center text-white">
+                  JD
+                </div>
+                <Link
+                  to=""
+                  type="button"
+                  className="text-white bg-[#d72050] focus:outline-none text-sm  font-semibold rounded-sm sm:text-sm px-4  py-2  text-center"
+                >
+                  Login
+                </Link>
+              </div>
+
               <button
                 data-collapse-toggle="navbar-sticky"
                 type="button"
@@ -45,18 +51,18 @@ const Navbar = () => {
               </button>
             </div>
             <div
-              className={`items-center  mt-5 sm:mt-0 justify-between duration-700 w-full md:flex md:w-auto ${
+              className={`items-center ml-0 sm:ml-[82px]  mt-4 sm:mt-0 justify-between duration-700 w-full md:flex md:w-auto ${
                 open
                   ? "translate-x-0 "
                   : "-translate-x-[110%] sm:-translate-x-0"
               }`}
               id="navbar-sticky"
             >
-              <ul className="flex absolute flex-col p-4 md:p-0 font-medium border rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0   ">
+              <ul className="flex absolute sm:static w-full  sm:dark:bg-gray-900 flex-col p-4 md:p-0 font-medium  rounded-sm  border-gray-300 border sm:border-none dark:text-white dark:bg-gray-800   dark:border-gray-600 bg-gray-200 sm:bg-gray-200  md:space-x-8  md:flex-row md:mt-0  ">
                 <li>
                   <Link
                     to="/"
-                    className="block  font-bold py-2 px-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    className="block  duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Home
                   </Link>
@@ -64,7 +70,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/"
-                    className="block font-bold py-2 px-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    className="block duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     About
                   </Link>
@@ -72,7 +78,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/"
-                    className="block font-bold py-2 px-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    className="block duration-300 font-bold py-2 px-3 text-gray-700 rounded h md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Carrer
                   </Link>
@@ -80,7 +86,7 @@ const Navbar = () => {
                 <li>
                   <Link
                     to="/"
-                    className="block font-bold py-2 px-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    className="block duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent hover:text-[#d72050] md:p-0  dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Blog
                   </Link>
