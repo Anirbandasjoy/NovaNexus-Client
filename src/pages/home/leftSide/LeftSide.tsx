@@ -6,7 +6,6 @@ type categoriesType = {
 };
 const LeftSide = () => {
   const { categories } = useFetchCategories();
-  console.log(categories);
   return (
     <div className="    w-5/12 ">
       <h1 className="tex-lg bg-gray-300 py-2 dark:bg-gray-800  dark:border dark:border-gray-700 px-2 sm:text-lg dark:text-gray-300 text-center text-gray-700  font-bold  ">
