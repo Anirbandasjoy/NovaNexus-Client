@@ -44,9 +44,9 @@ const Navbar = () => {
                 >
                   <path
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M1 1h15M1 7h15M1 13h15"
                   />
                 </svg>
@@ -71,7 +71,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/"
+                    to="/about"
                     className="block duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     About
@@ -79,7 +79,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/"
+                    to="/carrer"
                     className="block duration-300 font-bold py-2 px-3 text-gray-700 rounded h md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
                     Carrer
@@ -87,10 +87,10 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/"
+                    to="/blogs"
                     className="block duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent hover:text-[#d72050] md:p-0  dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
-                    Blog
+                    Blogs
                   </Link>
                 </li>
               </ul>

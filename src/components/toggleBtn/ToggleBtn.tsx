@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Switch } from "@headlessui/react";
-import useTheme from "../../hooks/useTheme";
+import useTheme from "../../hooks/theme/useTheme";
 const ToggoleBtn = () => {
   const [enabled, setEnabled] = useState(false);
   const { handleModeChnage } = useTheme();
