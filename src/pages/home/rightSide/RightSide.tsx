@@ -1,5 +1,5 @@
 const RightSide = () => {
-  return <div className="bg-purple-500  w-5/12">right side</div>;
+  return <div className=" dark:text-gray-300  w-5/12">right side</div>;
 };
 
 export default RightSide;
