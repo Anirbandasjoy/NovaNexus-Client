@@ -4,7 +4,7 @@ import news from "../../../assets/images/news1.png";
 import { BiComment, BiLike, BiShare } from "react-icons/bi";
 const NewsCard = () => {
   return (
-    <div>
+    <div className="">
       <div className="bg-white  rounded-md pb-4 dark:border dark:border-gray-700 dark:bg-gray-800">
         <div className="p-4 space-y-3">
           <div className="flex items-center  justify-between">

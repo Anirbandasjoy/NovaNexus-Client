@@ -6,7 +6,7 @@ import DropDown from "../../components/dropDown/DropDown";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="mt-8">
+    <div className="mt-4">
       <div>
         <nav className="  ">
           <div className=" flex flex-wrap items-center justify-between mx-auto ">

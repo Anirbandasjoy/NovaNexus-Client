@@ -4,7 +4,7 @@ import RightSide from "./rightSide/RightSide";
 
 const Home = () => {
   return (
-    <div className="mt-5 mb-32">
+    <div className="mt-4 ">
       <div className="flex gap-8">
         <LeftSide />
         <Middle />
