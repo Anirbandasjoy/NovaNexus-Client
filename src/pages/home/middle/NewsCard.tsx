@@ -26,7 +26,7 @@ const NewsCard = () => {
               </div>
             </div>
             <div>
-              <FaRegBookmark className="text-2xl cursor-pointer text-gray-600 dark:text-gray-300" />
+              <FaRegBookmark className="sm:text-2xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
             </div>
           </div>
           <div>
@@ -45,8 +45,8 @@ const NewsCard = () => {
             error magni ipsa ab, ipsum aut aspernatur nam. Facere, dicta
           </p>
         </div>
-        <div className="mt-8 px-4 w-full h-[1px] bg-gray-200 dark:bg-gray-700"></div>
-        <div className="px-4 mt-2 flex items-center ">
+        <div className="mt-8 sm:px-4 w-full h-[1px] bg-gray-200 dark:bg-gray-700"></div>
+        <div className="sm:px-4 mt-2 flex gap-6 sm:gap-0 items-center ">
           <div className="flex items-center gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200">
             <BiLike className="text-[21px] text-gray-500 dark:text-gray-300" />
             <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">

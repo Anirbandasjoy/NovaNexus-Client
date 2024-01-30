@@ -6,9 +6,9 @@ import DropDown from "../../components/dropDown/DropDown";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="mt-4">
+    <div className="mt-4 ">
       <div>
-        <nav className="  ">
+        <nav className="">
           <div className=" flex flex-wrap items-center justify-between mx-auto ">
             <ToggoleBtn />
             <div className="flex md:order-2 space-x-2 md:space-x-0 rtl:space-x-reverse">
@@ -53,7 +53,7 @@ const Navbar = () => {
               </button>
             </div>
             <div
-              className={`items-center sm:ml-[82px] ml-0  mt-4 sm:mt-0 justify-between duration-700 w-full md:flex md:w-auto ${
+              className={`items-center sm:ml-[82px] ml-0 z-10 mt-4 sm:mt-0 justify-between duration-700 w-full md:flex md:w-auto ${
                 open
                   ? "translate-x-0 "
                   : "-translate-x-[110%] sm:-translate-x-0"
