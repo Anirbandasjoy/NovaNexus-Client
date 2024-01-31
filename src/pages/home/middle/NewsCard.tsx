@@ -1,24 +1,24 @@
 import { FaRegBookmark } from "react-icons/fa";
-import profile from "../../../assets/images/anirban.jpg";
-import news from "../../../assets/images/news1.png";
+import newsImage from "../../../assets/images/news1.png";
 import { BiComment, BiLike, BiShare } from "react-icons/bi";
-const NewsCard = () => {
+import { NewsType } from "../../../helper/Type";
+const NewsCard = ({ news }: { news?: NewsType }) => {
   return (
     <div className="">
       <div className="bg-white  rounded-md pb-4 dark:border dark:border-gray-700 dark:bg-gray-800">
         <div className="p-4 space-y-3">
           <div className="flex items-center  justify-between">
             <div className="flex gap-3">
-              <div className="w-11 ">
+              <div className="w-11">
                 <img
                   className="w-full h-full rounded-full cursor-pointer"
-                  src={profile}
+                  src={news?.author?.image}
                   alt="profile"
                 />
               </div>
               <div>
                 <h1 className="font-semibold text-gray-600 dark:text-gray-300">
-                  Anirban Das
+                  {news?.author?.name}
                 </h1>
                 <h2 className="text-xs text-gray-600 dark:text-gray-300">
                   12/02/2024
@@ -37,7 +37,7 @@ const NewsCard = () => {
           </div>
         </div>
         <div className="w-full space-y-3 ">
-          <img className="w-full h-full bg-cover" src={news} alt="news" />
+          <img className="w-full h-full bg-cover" src={newsImage} alt="news" />
           <p className="text-sm text-gray-600 dark:text-gray-300 px-4">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam quis
             optio neque quisquam dolore natus voluptatibus accusantium
