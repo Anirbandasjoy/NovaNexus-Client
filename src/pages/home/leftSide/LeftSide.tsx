@@ -21,7 +21,7 @@ const LeftSide = () => {
   const { categories, isLoading, isError } = useFetchCategories();
 
   return (
-    <div className="w-5/12 hidden sm:block overflow-hidden">
+    <div className="w-6/12  hidden sm:block overflow-hidden">
       <h1 className="tex-lg bg-gray-300 py-2 dark:bg-gray-800  dark:border dark:border-gray-700 px-2 sm:text-lg dark:text-gray-300 text-center text-gray-700  font-bold  ">
         All Categories
       </h1>

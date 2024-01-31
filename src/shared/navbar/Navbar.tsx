@@ -53,14 +53,14 @@ const Navbar = () => {
               </button>
             </div>
             <div
-              className={`items-center sm:ml-[82px] ml-0 z-10 mt-4 sm:mt-0 justify-between duration-700 w-full md:flex md:w-auto ${
+              className={`items-center sm:ml-[78px] ml-0 z-10 mt-4 sm:mt-0 justify-between duration-700 w-full md:flex md:w-auto ${
                 open
                   ? "translate-x-0 "
                   : "-translate-x-[110%] sm:-translate-x-0"
               }`}
               id="navbar-sticky"
             >
-              <ul className="flex absolute sm:static w-full  sm:dark:bg-gray-900 flex-col p-4 md:p-0 font-medium  rounded-sm  border-gray-300 border sm:border-none dark:text-white dark:bg-gray-800   dark:border-gray-600 bg-gray-300 sm:bg-gray-200  md:space-x-8  md:flex-row md:mt-0  ">
+              <ul className="flex absolute sm:static w-full  sm:dark:bg-gray-900 flex-col p-4 md:p-0 font-medium  rounded-sm  border-gray-300 border sm:border-none dark:text-white dark:bg-gray-800   dark:border-gray-600 bg-gray-300 sm:bg-gray-200  md:space-x-8  md:flex-row md:mt-0 ">
                 <li>
                   <Link
                     to="/"

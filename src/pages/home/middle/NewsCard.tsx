@@ -1,5 +1,4 @@
 import { FaRegBookmark } from "react-icons/fa";
-import newsImage from "../../../assets/images/news1.png";
 import { BiComment, BiLike, BiShare } from "react-icons/bi";
 import { NewsType } from "../../../helper/Type";
 import { Link } from "react-router-dom";
@@ -60,7 +59,11 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
           </div>
         </div>
         <div className="w-full space-y-3 ">
-          <img className="w-full h-full bg-cover" src={newsImage} alt="news" />
+          <img
+            className="w-full h-full bg-cover"
+            src={news?.thumbnail_url}
+            alt="news"
+          />
           <p className="text-sm text-gray-600 dark:text-gray-300 px-4">
             {news?.details?.slice(0, 400)}
             <Link
