@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
-type ParamTypes = {
-  id: string;
-};
+// import { useParams } from "react-router-dom";
+// type ParamTypes = {
+//   id: string;
+// };
 const NewsDetails = () => {
-  const { id } = useParams<ParamTypes>();
-  console.log(id);
+  // const { id } = useParams<ParamTypes>();
+  // console.log(id);
   return (
     <div>
       <h1>News Details</h1>
