@@ -11,7 +11,7 @@ const category = [{ name: "All News" }];
 
 const Categories = () => {
   const { categories } = useFetchCategories();
-  console.log(categories);
+  // console.log(categories);
   const [selected, setSelected] = useState(category[0]);
 
   return (

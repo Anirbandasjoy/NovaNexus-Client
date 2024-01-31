@@ -1,3 +1,4 @@
+// News Types
 type CommentType = {
   _id: string;
   email: string;

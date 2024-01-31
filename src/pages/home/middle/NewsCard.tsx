@@ -2,7 +2,30 @@ import { FaRegBookmark } from "react-icons/fa";
 import newsImage from "../../../assets/images/news1.png";
 import { BiComment, BiLike, BiShare } from "react-icons/bi";
 import { NewsType } from "../../../helper/Type";
+import { Link } from "react-router-dom";
+type DateTimeFormatOptions = {
+  month?: "long" | "numeric" | "2-digit" | "short" | "narrow";
+  day?: "numeric" | "2-digit";
+  hour?: "numeric" | "2-digit";
+  minute?: "numeric" | "2-digit";
+  hour12?: boolean;
+};
+
 const NewsCard = ({ news }: { news?: NewsType }) => {
+  const formatDate = (dateString: string | undefined) => {
+    if (!dateString) return "";
+
+    const options: DateTimeFormatOptions = {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    };
+
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options);
+  };
   return (
     <div className="">
       <div className="bg-white  rounded-md pb-4 dark:border dark:border-gray-700 dark:bg-gray-800">
@@ -21,7 +44,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                   {news?.author?.name}
                 </h1>
                 <h2 className="text-xs text-gray-600 dark:text-gray-300">
-                  12/02/2024
+                  {formatDate(news?.author?.publishDate)}
                 </h2>
               </div>
             </div>
@@ -39,10 +62,13 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
         <div className="w-full space-y-3 ">
           <img className="w-full h-full bg-cover" src={newsImage} alt="news" />
           <p className="text-sm text-gray-600 dark:text-gray-300 px-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam quis
-            optio neque quisquam dolore natus voluptatibus accusantium
-            cupiditate similique nihil dolorem explicabo fugit doloremque sit
-            error magni ipsa ab, ipsum aut aspernatur nam. Facere, dicta
+            {news?.details?.slice(0, 400)}
+            <Link
+              className="ml-3 text-[#d72050] dark:text-red-400"
+              to={`/news-details/${news?._id}`}
+            >
+              Read_More
+            </Link>
           </p>
         </div>
         <div className="mt-8 sm:px-4 w-full h-[1px] bg-gray-200 dark:bg-gray-700"></div>

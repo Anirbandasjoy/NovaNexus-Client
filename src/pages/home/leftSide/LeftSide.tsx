@@ -1,3 +1,4 @@
+import Skeleton from "react-loading-skeleton";
 import useFetchCategories from "../../../hooks/category/useFetchCategories";
 import {
   FcAdvance,
@@ -17,14 +18,19 @@ type categoriesType = {
   slug: string;
 };
 const LeftSide = () => {
-  const { categories } = useFetchCategories();
+  const { categories, isLoading, isError } = useFetchCategories();
+
   return (
     <div className="w-5/12 hidden sm:block overflow-hidden">
       <h1 className="tex-lg bg-gray-300 py-2 dark:bg-gray-800  dark:border dark:border-gray-700 px-2 sm:text-lg dark:text-gray-300 text-center text-gray-700  font-bold  ">
         All Categories
       </h1>
       <div className="mt-6 ml-5 flex gap-3">
-        <div className="space-y-4">
+        <div
+          className={`space-y-4 ${isLoading && "hidden"} ${
+            isError && "hidden"
+          } `}
+        >
           <FcAdvertising className="text-[24px] cursor-pointer" />
           <FcAdvance className="text-[24px] cursor-pointer" />
           <FcEndCall className="text-[24px] cursor-pointer" />
@@ -37,6 +43,22 @@ const LeftSide = () => {
           <FcElectricity className="text-[24px] cursor-pointer" />
         </div>
         <div className="space-y-4 w-full">
+          {isLoading && (
+            <div className="flex items-center gap-3">
+              <div className="h-6 w-6">
+                <Skeleton
+                  className="my-2 rounded-sm w-full h-full"
+                  count={categories?.payload?.length || 10}
+                />
+              </div>
+              <div className="h-6 w-44 ">
+                <Skeleton
+                  className="my-2 rounded-sm w-full h-full"
+                  count={categories?.payload?.length || 10}
+                />
+              </div>
+            </div>
+          )}
           {categories?.payload?.map((category: categoriesType) => {
             return (
               <div key={category?._id} className="">

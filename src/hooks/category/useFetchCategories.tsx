@@ -3,7 +3,11 @@ import { useAxios } from "../axios/useAxios";
 
 const useFetchCategories = () => {
   const { axiosInstance } = useAxios();
-  const { data: categories, isLoading } = useQuery({
+  const {
+    data: categories,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ["categories"],
     queryFn: async () => {
       const { data } = await axiosInstance.get("/categories");
@@ -11,7 +15,7 @@ const useFetchCategories = () => {
     },
   });
 
-  return { categories, isLoading };
+  return { categories, isLoading, isError };
 };
 
 export default useFetchCategories;

@@ -9,7 +9,7 @@ type MiddleComponentProps = {
 };
 const Middle: FC<MiddleComponentProps> = () => {
   const { newsData, isLoading } = useFetchNews();
-  console.log(newsData);
+  // console.log(newsData);
 
   return (
     <div className="w-full">
