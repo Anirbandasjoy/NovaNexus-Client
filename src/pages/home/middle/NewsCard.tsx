@@ -1,14 +1,7 @@
 import { FaRegBookmark } from "react-icons/fa";
 import { BiComment, BiLike, BiShare } from "react-icons/bi";
-import { NewsType } from "../../../helper/Type";
+import { DateTimeFormatOptions, NewsType } from "../../../helper/Type";
 import { Link } from "react-router-dom";
-type DateTimeFormatOptions = {
-  month?: "long" | "numeric" | "2-digit" | "short" | "narrow";
-  day?: "numeric" | "2-digit";
-  hour?: "numeric" | "2-digit";
-  minute?: "numeric" | "2-digit";
-  hour12?: boolean;
-};
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
   const formatDate = (dateString: string | undefined) => {

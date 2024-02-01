@@ -1,7 +1,8 @@
 // News Types
-type CommentType = {
+export type CommentType = {
   _id: string;
-  email: string;
+  name: string;
+  profileImage: string;
   commentText: string;
   createdAt: string;
   updatedAt: string;
@@ -35,4 +36,20 @@ export type NewsPayloadType = {
   success: boolean;
   message: string;
   payload: NewsType[];
+};
+
+// Date Types
+
+export type DateTimeFormatOptions = {
+  month?: "long" | "numeric" | "2-digit" | "short" | "narrow";
+  day?: "numeric" | "2-digit";
+  hour?: "numeric" | "2-digit";
+  minute?: "numeric" | "2-digit";
+  hour12?: boolean;
+};
+
+// Comment Types
+
+export type commentFormValuType = {
+  commentText: string;
 };
