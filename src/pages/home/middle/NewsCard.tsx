@@ -2,8 +2,13 @@ import { FaRegBookmark } from "react-icons/fa";
 import { BiComment, BiLike, BiShare } from "react-icons/bi";
 import { DateTimeFormatOptions, NewsType } from "../../../helper/Type";
 import { Link } from "react-router-dom";
+import { useAxios } from "../../../hooks/axios/useAxios";
+import toast from "react-hot-toast";
+import useFetchNewsBookmark from "../../../hooks/newBookmark/useFetchNewsBookmark";
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
+  const { axiosInstance } = useAxios();
+  const { refetch } = useFetchNewsBookmark();
   const formatDate = (dateString: string | undefined) => {
     if (!dateString) return "";
 
@@ -17,6 +22,20 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
 
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", options);
+  };
+
+  const handleCreateBookmark = async (id?: string) => {
+    try {
+      const { data } = await axiosInstance.post("/news-bookmark", {
+        newsId: id,
+      });
+      console.log(data);
+      toast.success("Create a new Bookmark");
+      refetch();
+    } catch (error) {
+      // console.log(error.message);
+      toast.error("News already exists");
+    }
   };
   return (
     <div className="">
@@ -40,7 +59,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                 </h2>
               </div>
             </div>
-            <div>
+            <div onClick={() => handleCreateBookmark(news?._id)}>
               <FaRegBookmark className="sm:text-2xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
             </div>
           </div>

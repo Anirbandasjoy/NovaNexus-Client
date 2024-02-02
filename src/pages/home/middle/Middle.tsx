@@ -16,7 +16,7 @@ const Middle: FC<MiddleComponentProps> = () => {
       <div className="sm:hidden">
         <Categories />
       </div>
-      <div className="w-full sm:h-[calc(100vh-72px)] h-[calc(100vh-50px)] overflow-auto">
+      <div className="w-full sm:h-[calc(100vh-10px)] h-[calc(100vh-40px)] overflow-auto">
         {isLoading && (
           <div className="space-y-4">
             {Array.from({ length: 3 }).map((_, index) => (

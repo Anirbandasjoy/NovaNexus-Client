@@ -72,7 +72,7 @@ const Comments = ({
     setInputStr("");
     setSelectedImage(null);
     refetch();
-    toast.success("Create a new comment✅");
+    toast.success("Create a new comment");
   };
   const handleDeleteComment = async (id: string) => {
     try {
@@ -81,7 +81,7 @@ const Comments = ({
         `/news-comments/${id}?newsId=${newsId}`
       );
       console.log(data);
-      toast.success("Deleting this comment✅");
+      toast.success("Deleting this comment");
       refetch();
     } catch (error) {
       console.error("Error deleting comment:", error);
