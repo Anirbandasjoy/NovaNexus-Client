@@ -1,7 +1,7 @@
 import { BsEmojiFrown } from "react-icons/bs";
 import { CommentType, NewsType } from "../../helper/Type";
 import { LuSend } from "react-icons/lu";
-import { RiAttachment2 } from "react-icons/ri";
+import { RiAttachment2, RiDeleteBin6Line } from "react-icons/ri";
 import Picker from "emoji-picker-react";
 import { ChangeEvent, useState } from "react";
 import { IoMdClose } from "react-icons/io";
@@ -51,9 +51,9 @@ const Comments = ({
   };
 
   // Comments Upload Proecess
-  const id = payload?._id;
+  const newsId = payload?._id;
   const { axiosInstance } = useAxios();
-  const { refetch } = useFetchSignleNew(id);
+  const { refetch } = useFetchSignleNew(newsId);
   // console.log(id);
   const commentBody = {
     name: "Anirban Das joy",
@@ -65,7 +65,7 @@ const Comments = ({
   const handleUploadComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { data } = await axiosInstance.post(
-      `/news-comments/${id}`,
+      `/news-comments/${newsId}`,
       commentBody
     );
     console.log("serverData", data);
@@ -73,6 +73,20 @@ const Comments = ({
     setSelectedImage(null);
     refetch();
     toast.success("Create a new comment✅");
+  };
+  const handleDeleteComment = async (id: string) => {
+    try {
+      console.log(id);
+      const { data } = await axiosInstance.delete(
+        `/news-comments/${id}?newsId=${newsId}`
+      );
+      console.log(data);
+      toast.success("Deleting this comment✅");
+      refetch();
+    } catch (error) {
+      console.error("Error deleting comment:", error);
+      toast.error("Failed to delete comment❌");
+    }
   };
 
   // console.log(commentBody);
@@ -194,9 +208,15 @@ const Comments = ({
                 </div>
 
                 <div className="w-8/12">
-                  <h1 className="sm:text-[16px]  dark:text-gray-300 text-gray-600 font-bold">
-                    {comment?.name}
-                  </h1>
+                  <div className="flex gap-2">
+                    <h1 className="sm:text-[16px]  dark:text-gray-300 text-gray-600 font-bold">
+                      {comment?.name}
+                    </h1>
+                    <RiDeleteBin6Line
+                      onClick={() => handleDeleteComment(comment?._id)}
+                      className="dark:text-gray-300 text-gray-600 cursor-pointer font-bold"
+                    />
+                  </div>
                   <h2 className="text-[10px] text-gray-600  text-left dark:text-gray-300">
                     {formatDate(comment?.createdAt)}
                   </h2>
