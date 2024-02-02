@@ -56,7 +56,7 @@ const NewsDetails = () => {
           <FaRegBookmark className="sm:text-2xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
         </div>
       </div>
-      <div className="flex gap-2 flex-col sm:flex-row">
+      <div className="flex gap-2 flex-col ">
         <div className="w-full h-full">
           <div className="w-full h-full">
             <img
@@ -65,11 +65,8 @@ const NewsDetails = () => {
               alt="newImage"
             />
           </div>
-          <div className="hidden sm:block">
-            <Comments payload={payload} formatDate={formatDate} />
-          </div>
         </div>
-        <div className="sm:w-8/12 w-full ">
+        <div className="sm:w-full w-full ">
           <div className="bg-[#D72050] py-2">
             <Marquee
               className="font-bold text-meduim sm:text-lg  text-gray-100  "
@@ -84,11 +81,11 @@ const NewsDetails = () => {
               {payload?.details}
             </p>
           </div>
-          <div className="mt-5 w-full sm:w-10/12 h-[2px] dark:h-[1px] dark:bg-gray-700 bg-gray-300"></div>
-          <div className=" sm:hidden">
-            <Comments payload={payload} formatDate={formatDate} />
-          </div>
+          <div className="mt-5 w-full sm:w-11/12 h-[2px] dark:h-[1px] dark:bg-gray-700 bg-gray-300"></div>
         </div>
+      </div>
+      <div className="">
+        <Comments payload={payload} formatDate={formatDate} />
       </div>
     </div>
   );

@@ -3,7 +3,11 @@ import { useAxios } from "../axios/useAxios";
 
 const useFetchSignleNew = (id: string | undefined) => {
   const { axiosInstance } = useAxios();
-  const { data: newsDetails, isLoading } = useQuery({
+  const {
+    data: newsDetails,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["news", id],
     queryFn: async () => {
       const { data } = await axiosInstance.get(`/news/${id}`);
@@ -11,7 +15,7 @@ const useFetchSignleNew = (id: string | undefined) => {
     },
   });
 
-  return { newsDetails, isLoading };
+  return { newsDetails, isLoading, refetch };
 };
 
 export default useFetchSignleNew;

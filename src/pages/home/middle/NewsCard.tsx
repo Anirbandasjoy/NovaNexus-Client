@@ -52,11 +52,16 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
           </div>
         </div>
         <div className="w-full space-y-3 ">
-          <img
-            className="w-full h-full bg-cover"
-            src={news?.thumbnail_url}
-            alt="news"
-          />
+          <Link
+            to={`/news-details/${news?._id}`}
+            className="w-full cursor-pointer"
+          >
+            <img
+              className="w-full h-full bg-cover"
+              src={news?.thumbnail_url}
+              alt="news"
+            />
+          </Link>
           <p className="text-sm text-gray-600 dark:text-gray-300 px-4">
             {news?.details?.slice(0, 400)}
             <Link

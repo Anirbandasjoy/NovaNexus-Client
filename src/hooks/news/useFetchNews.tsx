@@ -3,7 +3,11 @@ import { useAxios } from "../axios/useAxios";
 
 const useFetchNews = () => {
   const { axiosInstance } = useAxios();
-  const { data: newsData, isLoading } = useQuery({
+  const {
+    data: newsData,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["news"],
     queryFn: async () => {
       const { data } = await axiosInstance.get("/news");
@@ -11,7 +15,7 @@ const useFetchNews = () => {
     },
   });
 
-  return { newsData, isLoading };
+  return { newsData, isLoading, refetch };
 };
 
 export default useFetchNews;

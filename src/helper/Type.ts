@@ -3,6 +3,7 @@ export type CommentType = {
   _id: string;
   name: string;
   profileImage: string;
+  commentImage: string;
   commentText: string;
   createdAt: string;
   updatedAt: string;
