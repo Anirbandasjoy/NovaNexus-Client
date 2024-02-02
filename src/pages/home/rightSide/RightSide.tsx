@@ -39,7 +39,9 @@ const RightSide = () => {
                   onClick={() => handleDeleteBookmarkNews(news?._id)}
                 />
               </div>
-              <h1 className="py-2">{news?.newsId?.title}</h1>
+              <h1 className="py-2 text-left ml-4">
+                {news?.newsId?.title?.slice(0, 15)}...
+              </h1>
             </div>
           );
         })}
