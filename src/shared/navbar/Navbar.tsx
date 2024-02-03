@@ -1,10 +1,39 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ToggoleBtn from "../../components/toggleBtn/ToggleBtn";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DropDown from "../../components/dropDown/DropDown";
+import { AuthContext } from "../../contex/AuthProvider";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import { AuthContextType } from "../../helper/Type";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const { logOut, user } = useContext(
+    AuthContext as React.Context<AuthContextType>
+  );
   const [open, setOpen] = useState(false);
+  const handleLogOut = async () => {
+    try {
+      await Swal.fire({
+        title: "Are you sure?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Logout",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await logOut();
+          toast.success("Logout Successfully");
+          navigate("/login"); // Navigate to the home page ("/") after logging out
+        }
+      });
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
   return (
     <div className="mt-4 ">
       <div>
@@ -13,17 +42,26 @@ const Navbar = () => {
             <ToggoleBtn />
             <div className="flex md:order-2 space-x-2 md:space-x-0 rtl:space-x-reverse">
               <div className="flex items-center justify-center gap-4 ">
-                <DropDown />
+                <DropDown userName={user?.displayName} />
                 {/* <div className="font-bold uppercase bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
                   JD
                 </div> */}
-                <Link
-                  to=""
-                  type="button"
-                  className="text-white bg-[#d72050] focus:outline-none text-sm  font-semibold rounded-sm sm:text-sm px-4  py-2  text-center"
-                >
-                  Login
-                </Link>
+                {user ? (
+                  <button
+                    onClick={handleLogOut}
+                    className="text-white bg-[#d72050] focus:outline-none text-sm  font-semibold rounded-sm sm:text-sm px-4  py-2  text-center"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <Link
+                    to="/login"
+                    type="button"
+                    className="text-white bg-[#d72050] focus:outline-none text-sm  font-semibold rounded-sm sm:text-sm px-4  py-2  text-center"
+                  >
+                    Login
+                  </Link>
+                )}
               </div>
 
               <button

@@ -10,17 +10,15 @@ interface MenuItemComponentProps {
   path: string;
 }
 
-interface NavbarProps {}
-
-const DropDown: React.FC<NavbarProps> = () => {
+const DropDown = ({ userName }: { userName: string | null | undefined }) => {
   //   const [activeMenuItem, setActiveMenuItem] = useState("");
 
   return (
     <div className="">
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="font-bold uppercase bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
-            JD
+          <Menu.Button className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+            {userName ? userName?.slice(0, 2) : "D"}
           </Menu.Button>
         </div>
         <Transition

@@ -18,7 +18,7 @@ const RightSide = () => {
       console.log(error);
     }
   };
-  console.log(bookmarkNews);
+  // console.log(bookmarkNews);
   return (
     <div className=" dark:text-gray-300 hidden sm:block w-5/12 ">
       <div className="bg-gray-300 py-2 cursor-pointer flex justify-center gap-2 items-center dark:bg-gray-800  dark:border dark:border-gray-700 px-2  dark:text-gray-300 text-center text-gray-700  ">
