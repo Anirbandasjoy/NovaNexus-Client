@@ -10,6 +10,7 @@ import RegistationLoading from "../../components/Loading/RegistationLoading";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
+import { uploadImage } from "../../api";
 const schema = yup.object({
   fullname: yup.string().required(),
   email: yup.string().email().required(),
@@ -41,7 +42,7 @@ const Register = () => {
     "Select You Profile Pic"
   );
   const [loading, setLoading] = useState(false);
-  const [profilePic, setProfilePic] = useState<File | null>(null);
+  const [profilePic, setProfilePic] = useState<string | null>(null);
   const [registerErr, setRegisterErr] = useState<string | null>(null);
   console.log(profilePic);
 
@@ -51,11 +52,15 @@ const Register = () => {
   };
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    setProfilePic(file || null);
-    setProfilePicText(file?.name || "Select Your Profile Pic");
-    event.target.value = "";
+    if (file) {
+      const profileImageURL = await uploadImage(file);
+      setProfilePic(profileImageURL);
+      setProfilePicText(file?.name || "Select Your Profile Pic");
+      event.target.value = "";
+    }
   };
 
+  console.log(profilePic);
   const onSubmit = async (data: RegistationTypes) => {
     try {
       setRegisterErr(null);
@@ -63,6 +68,7 @@ const Register = () => {
       const user = await registerUser(data?.email, data?.password);
       await updateProfile(user.user, {
         displayName: data?.fullname,
+        photoURL: profilePic,
       });
       console.log(user);
       setLoading(false);
@@ -172,7 +178,7 @@ const Register = () => {
               <p className="dark:text-gray-400">
                 Not Register?please{" "}
                 <Link to="/login" className="text-red-500">
-                  Register
+                  Login
                 </Link>
               </p>
             </form>

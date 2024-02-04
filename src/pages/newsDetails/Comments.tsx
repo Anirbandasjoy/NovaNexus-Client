@@ -1,15 +1,16 @@
 import { BsEmojiFrown } from "react-icons/bs";
-import { CommentType, NewsType } from "../../helper/Type";
+import { AuthContextType, CommentType, NewsType } from "../../helper/Type";
 import { LuSend } from "react-icons/lu";
 import { RiAttachment2, RiDeleteBin6Line } from "react-icons/ri";
 import Picker from "emoji-picker-react";
-import { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useContext, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { uploadImage } from "../../api";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { useAxios } from "../../hooks/axios/useAxios";
 import useFetchSignleNew from "../../hooks/news/useFetchSignleNew";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../contex/AuthProvider";
 const Comments = ({
   payload,
   formatDate,
@@ -17,6 +18,10 @@ const Comments = ({
   payload: NewsType;
   formatDate: (dateString: string | undefined) => string;
 }) => {
+  const { user, loading } = useContext(
+    AuthContext as React.Context<AuthContextType>
+  );
+
   const [inputStr, setInputStr] = useState("");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showPicker, setShowPicker] = useState(false);
@@ -55,24 +60,27 @@ const Comments = ({
   const { axiosInstance } = useAxios();
   const { refetch } = useFetchSignleNew(newsId);
   // console.log(id);
-  const commentBody = {
-    name: "Anirban Das joy",
-    profileImage: "https://i.ibb.co/Yj551HH/anirban-a35639a7-Rixk-W7y-C.jpg",
-    commentImage: selectedImage,
-    commentText: inputStr,
-  };
 
   const handleUploadComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { data } = await axiosInstance.post(
-      `/news-comments/${newsId}`,
-      commentBody
-    );
-    console.log("serverData", data);
-    setInputStr("");
-    setSelectedImage(null);
-    refetch();
-    toast.success("Create a new comment");
+    if (!loading) {
+      const commentBody = {
+        name: user?.displayName,
+        profileImage: user?.photoURL,
+        commentImage: selectedImage,
+        commentText: inputStr,
+      };
+      console.log(commentBody);
+      const { data } = await axiosInstance.post(
+        `/news-comments/${newsId}`,
+        commentBody
+      );
+      console.log("serverData", data);
+      setInputStr("");
+      setSelectedImage(null);
+      refetch();
+      toast.success("Create a new comment");
+    }
   };
   const handleDeleteComment = async (id: string) => {
     try {
@@ -199,13 +207,21 @@ const Comments = ({
           {payload?.comments?.map((comment: CommentType) => {
             return (
               <div className="flex gap-4 w-full" key={comment?._id}>
-                <div className="w-11 h-11 ">
-                  <img
-                    className="w-full h-full rounded-full cursor-pointer"
-                    src={comment?.profileImage}
-                    alt="profile"
-                  />
-                </div>
+                {comment?.profileImage === null ? (
+                  <div>
+                    <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+                      {user?.displayName?.slice(0, 2)}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="w-11 h-11 ">
+                    <img
+                      className="w-full h-full rounded-full cursor-pointer"
+                      src={comment?.profileImage}
+                      alt="profile"
+                    />
+                  </div>
+                )}
 
                 <div className="w-8/12">
                   <div className="flex gap-2">
