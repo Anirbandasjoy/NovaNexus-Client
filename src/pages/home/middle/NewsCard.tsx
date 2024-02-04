@@ -1,10 +1,11 @@
 import { FaRegBookmark } from "react-icons/fa";
-import { BiComment, BiLike, BiShare } from "react-icons/bi";
+import { BiComment, BiLike } from "react-icons/bi";
 import { DateTimeFormatOptions, NewsType } from "../../../helper/Type";
 import { Link } from "react-router-dom";
 import { useAxios } from "../../../hooks/axios/useAxios";
 import toast from "react-hot-toast";
 import useFetchNewsBookmark from "../../../hooks/newBookmark/useFetchNewsBookmark";
+import ShareNews from "./ShareNews";
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
   const { axiosInstance } = useAxios();
@@ -105,12 +106,11 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
               Comment
             </p>
           </div>
-          <div className="flex items-center gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200">
-            <BiShare className="text-[21px] text-gray-500 dark:text-gray-300" />
-            <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">
-              Share
-            </p>
-          </div>
+          <ShareNews
+            shareURL={
+              `https://novanexus.vercel.app/news-details/${news?._id}` || null
+            }
+          />
         </div>
       </div>
     </div>
