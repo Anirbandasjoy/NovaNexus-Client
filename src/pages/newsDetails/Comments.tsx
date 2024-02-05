@@ -210,7 +210,7 @@ const Comments = ({
                 {comment?.profileImage === null ? (
                   <div>
                     <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
-                      {user?.displayName?.slice(0, 2)}
+                      {comment?.name?.slice(0, 2)}
                     </div>
                   </div>
                 ) : (
