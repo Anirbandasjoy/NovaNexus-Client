@@ -5,6 +5,7 @@ import Home from "../pages/home/Home";
 import NewsDetails from "../pages/newsDetails/NewsDetails";
 import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
+import PribetRoutes from "./PribetRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -19,7 +20,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "news-details/:id",
-        element: <NewsDetails />,
+        element: <PribetRoutes><NewsDetails /></PribetRoutes>,
       },
     ],
   },

@@ -12,6 +12,7 @@ const Navbar = () => {
   const { logOut, user } = useContext(
     AuthContext as React.Context<AuthContextType>
   );
+  const location = localStorage.getItem("location");
   const [open, setOpen] = useState(false);
   const handleLogOut = async () => {
     try {
@@ -26,7 +27,10 @@ const Navbar = () => {
         if (result.isConfirmed) {
           await logOut();
           toast.success("Logout Successfully");
-          navigate("/login"); // Navigate to the home page ("/") after logging out
+          navigate("/login");
+          if (location) {
+            localStorage.removeItem("location");
+          }
         }
       });
     } catch (error) {

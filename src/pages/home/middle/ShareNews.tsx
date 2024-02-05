@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { BiShare } from "react-icons/bi";
 import {
   FacebookIcon,
@@ -10,13 +10,16 @@ import {
   EmailIcon,
   LinkedinShareButton,
   LinkedinIcon,
-
   TelegramShareButton,
   TelegramIcon,
 } from "react-share";
 import copy from "clipboard-copy";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../../contex/AuthProvider";
+import { AuthContextType } from "../../../helper/Type";
+import { Navigate } from "react-router-dom";
 const ShareNews = ({ shareURL }: { shareURL: string | null }) => {
+  const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -70,42 +73,46 @@ const ShareNews = ({ shareURL }: { shareURL: string | null }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <div className="w-full max-w-md py-10 relative transform overflow-hidden rounded-md bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <div className="w-full max-w-md py-10 relative transform overflow-hidden rounded-md bg-white dark:bg-gray-800 p-6 text-left align-middle shadow-xl transition-all">
                   <div className="flex justify-center flex-col gap-4 items-center">
-                    <div className="flex gap-3 items-center">
-                      <div>
-                        <FacebookShareButton url={shareURL || ""}>
-                          <FacebookIcon size={35} round />
-                        </FacebookShareButton>
+                    {user ? (
+                      <div className="flex gap-3 items-center">
+                        <div>
+                          <FacebookShareButton url={shareURL || ""}>
+                            <FacebookIcon size={35} round />
+                          </FacebookShareButton>
+                        </div>
+                        <div>
+                          <WhatsappShareButton url={shareURL ?? ""}>
+                            <WhatsappIcon size={35} round />
+                          </WhatsappShareButton>
+                        </div>
+                        <div>
+                          <EmailShareButton url={shareURL || ""}>
+                            <EmailIcon size={35} round />
+                          </EmailShareButton>
+                        </div>
+                        <div>
+                          <LinkedinShareButton url={shareURL || ""}>
+                            <LinkedinIcon size={35} round />
+                          </LinkedinShareButton>
+                        </div>
+                        {/* <div>
+                    <FacebookMessengerShareButton url={shareURL || ""} >
+                      <FacebookIcon size={35} round />
+                    </FacebookMessengerShareButton>
+                  </div> */}
+                        <div>
+                          <TelegramShareButton url={shareURL || ""}>
+                            <TelegramIcon size={35} round />
+                          </TelegramShareButton>
+                        </div>
                       </div>
-                      <div>
-                        <WhatsappShareButton url={shareURL ?? ""}>
-                          <WhatsappIcon size={35} round />
-                        </WhatsappShareButton>
-                      </div>
-                      <div>
-                        <EmailShareButton url={shareURL || ""}>
-                          <EmailIcon size={35} round />
-                        </EmailShareButton>
-                      </div>
-                      <div>
-                        <LinkedinShareButton url={shareURL || ""}>
-                          <LinkedinIcon size={35} round />
-                        </LinkedinShareButton>
-                      </div>
-                      {/* <div>
-                        <FacebookMessengerShareButton url={shareURL || ""} >
-                          <FacebookIcon size={35} round />
-                        </FacebookMessengerShareButton>
-                      </div> */}
-                      <div>
-                        <TelegramShareButton url={shareURL || ""}>
-                          <TelegramIcon size={35} round />
-                        </TelegramShareButton>
-                      </div>
-                    </div>
+                    ) : (
+                      <Navigate to="/login" />
+                    )}
                     <div className="relative">
-                      <div className="py-3 bg-[#f5f7f7] px-3  border-red-600 border dark:text-red-500 text-red-500 w-72 dark:border-red-600  outline-red-500 text-[12px] rounded-md">
+                      <div className="py-3 bg-[#f5f7f7] dark:bg-[#2f3030] px-3  border-red-600 dark:border-gray-300 border  dark:text-gray-200 text-red-500 w-72   outline-red-500 text-[12px] rounded-md">
                         {shareURL}
                       </div>
                       <div

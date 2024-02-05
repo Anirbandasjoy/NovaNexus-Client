@@ -44,7 +44,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [profilePic, setProfilePic] = useState<string | null>(null);
   const [registerErr, setRegisterErr] = useState<string | null>(null);
-  console.log(profilePic);
+  const location = localStorage.getItem("location");
 
   const handleFileSelect = () => {
     const fileInput = document.getElementById("fileInput") as HTMLInputElement;
@@ -73,7 +73,7 @@ const Register = () => {
       console.log(user);
       setLoading(false);
       toast.success("Registation Successfully");
-      navigate("/");
+      navigate(location ? location : "/");
       reset();
     } catch (error) {
       setLoading(false);

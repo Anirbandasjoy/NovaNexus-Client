@@ -37,6 +37,7 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
   const [registerErr, setRegisterErr] = useState<string | null>(null);
+  const location = localStorage.getItem("location");
 
   const onSubmit = async (data: LoginTypes) => {
     try {
@@ -46,7 +47,8 @@ const Login = () => {
       console.log(user);
       setLoading(false);
       toast.success("Login Successfully");
-      navigate("/");
+      navigate(location ? location : "/");
+
       reset();
     } catch (error) {
       setLoading(false);
