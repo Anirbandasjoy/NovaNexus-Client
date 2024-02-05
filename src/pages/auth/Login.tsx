@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useContext, useState } from "react";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
+import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
 const schema = yup.object({
   email: yup.string().email().required(),
   password: yup
@@ -37,6 +38,7 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
   const [registerErr, setRegisterErr] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(true);
   const location = localStorage.getItem("location");
 
   const onSubmit = async (data: LoginTypes) => {
@@ -65,7 +67,7 @@ const Login = () => {
       <div className="flex justify-center items-center h-screen">
         <div className="bg-white dark:bg-gray-800 px-8  sm:px-12 space-y-4 rounded-md py-12 sm:py-20 w-[35rem]">
           {registerErr && (
-            <div className="py-3 bg-white text-center px-3  border-red-600 border dark:text-red-500 text-red-500   dark:border-red-600  outline-red-500 text-sm rounded-md">
+            <div className="py-3 bg-white dark:bg-gray-800 text-center px-3  border-red-600 border dark:text-red-500 text-red-500   dark:border-red-600  outline-red-500 text-sm rounded-md">
               {registerErr}
             </div>
           )}
@@ -96,9 +98,9 @@ const Login = () => {
                     {errors.email?.message}
                   </p>
                 </div>
-                <div className="flex flex-col gap-1 w-full">
+                <div className="flex flex-col gap-1 w-full relative">
                   <input
-                    type="password"
+                    type={showPassword ? "password" : "text"}
                     {...register("password")}
                     placeholder="Password"
                     className="py-3 bg-[#ecf0f1] px-3  border-gray-300 border dark:text-white dark:bg-gray-800  dark:border-gray-600  outline-none text-sm rounded-md"
@@ -106,6 +108,16 @@ const Login = () => {
                   <p className="text-red-500 text-xs dark:text-red-400 font-semibold">
                     {errors.password?.message}
                   </p>
+                  <div
+                    className="absolute right-6 top-[23%] cursor-pointer "
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <AiTwotoneEye className="text-[22px] text-[#7b7f80] " />
+                    ) : (
+                      <AiTwotoneEyeInvisible className="text-[22px] text-[#7b7f80] " />
+                    )}
+                  </div>
                 </div>
               </div>
 

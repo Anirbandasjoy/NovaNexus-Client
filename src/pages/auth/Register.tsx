@@ -11,6 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
 import { uploadImage } from "../../api";
+import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
 const schema = yup.object({
   fullname: yup.string().required(),
   email: yup.string().email().required(),
@@ -44,6 +45,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [profilePic, setProfilePic] = useState<string | null>(null);
   const [registerErr, setRegisterErr] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(true);
   const location = localStorage.getItem("location");
 
   const handleFileSelect = () => {
@@ -90,7 +92,7 @@ const Register = () => {
       <div className="flex justify-center items-center h-screen">
         <div className="bg-white dark:bg-gray-800 px-8 sm:px-12 relative space-y-4 rounded-md py-12 sm:py-20 w-[35rem]">
           {registerErr && (
-            <div className="py-3 bg-white text-center px-3  border-red-600 border dark:text-red-500 text-red-500   dark:border-red-600  outline-red-500 text-sm rounded-md">
+            <div className="py-3 bg-white text-center dark:bg-gray-800 px-3  border-red-600 border dark:text-red-500 text-red-500   dark:border-red-600  outline-red-500 text-sm rounded-md">
               {registerErr}
             </div>
           )}
@@ -124,7 +126,7 @@ const Register = () => {
                     {errors.email?.message}
                   </p>
                 </div>
-                <div className="flex flex-col gap-1 w-full">
+                <div className="flex flex-col gap-1 w-full relative">
                   <input
                     type="password"
                     {...register("password")}
@@ -134,6 +136,16 @@ const Register = () => {
                   <p className="text-red-500 text-xs dark:text-red-400 font-semibold">
                     {errors.password?.message}
                   </p>
+                  <div
+                    className="absolute right-6 top-[23%] cursor-pointer "
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? (
+                      <AiTwotoneEye className="text-[22px] text-[#7b7f80] " />
+                    ) : (
+                      <AiTwotoneEyeInvisible className="text-[22px] text-[#7b7f80] " />
+                    )}
+                  </div>
                 </div>
                 <div className="flex flex-col gap-1 w-full">
                   <div className="flex items-center space-x-2 cursor-pointer">
