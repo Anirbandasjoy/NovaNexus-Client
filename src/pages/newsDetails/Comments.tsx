@@ -228,10 +228,12 @@ const Comments = ({
                     <h1 className="sm:text-[16px]  dark:text-gray-300 text-gray-600 font-bold">
                       {comment?.name}
                     </h1>
-                    <RiDeleteBin6Line
-                      onClick={() => handleDeleteComment(comment?._id)}
-                      className="dark:text-gray-300 text-gray-600 cursor-pointer font-bold"
-                    />
+                    {user?.displayName === comment?.name && (
+                      <RiDeleteBin6Line
+                        onClick={() => handleDeleteComment(comment?._id)}
+                        className="dark:text-gray-300 text-gray-600 cursor-pointer font-bold"
+                      />
+                    )}
                   </div>
                   <h2 className="text-[10px] text-gray-600  text-left dark:text-gray-300">
                     {formatDate(comment?.createdAt)}

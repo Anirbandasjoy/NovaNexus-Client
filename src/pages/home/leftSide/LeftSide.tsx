@@ -12,14 +12,21 @@ import {
   FcEndCall,
   FcFrame,
 } from "react-icons/fc";
+
 type categoriesType = {
   _id: string;
   name: string;
   slug: string;
 };
-const LeftSide = () => {
+const LeftSide = ({
+  getCategoryId,
+}: {
+  getCategoryId: (id: string | undefined) => void;
+}) => {
   const { categories, isLoading, isError } = useFetchCategories();
-
+  const handleCategoryNews = (id: string) => {
+    getCategoryId(id);
+  };
   return (
     <div className="w-6/12  hidden sm:block overflow-hidden">
       <h1 className="tex-lg bg-gray-300 py-2 dark:bg-gray-800  dark:border dark:border-gray-700 px-2 sm:text-lg dark:text-gray-300 text-center text-gray-700  font-bold  ">
@@ -61,7 +68,11 @@ const LeftSide = () => {
           )}
           {categories?.payload?.map((category: categoriesType) => {
             return (
-              <div key={category?._id} className="">
+              <div
+                key={category?._id}
+                className=""
+                onClick={() => handleCategoryNews(category?._id)}
+              >
                 <h1 className="font-semibold hover:text-red-400 duration-75 w-full cursor-pointer text-[16px]  dark:text-gray-400 text-gray-500">
                   {category?.name}
                 </h1>
