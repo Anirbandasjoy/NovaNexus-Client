@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaExclamationCircle } from "react-icons/fa";
 
 const NotFound = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <FaExclamationCircle className="text-red-500 text-6xl mb-4" />
@@ -11,9 +12,14 @@ const NotFound = () => {
       <p className="text-gray-600">
         The page you are looking for doesn't exist.
       </p>
-      <Link to="/" className="text-blue-500 hover:underline mt-4">
-        Go back to home
-      </Link>
+      <div
+        onClick={() => {
+          navigate(-1);
+        }}
+        className="text-blue-500 cursor-pointer hover:underline mt-4"
+      >
+        Go Backwards
+      </div>
     </div>
   );
 };

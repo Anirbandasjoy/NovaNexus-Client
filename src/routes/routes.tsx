@@ -8,6 +8,8 @@ import Login from "../pages/auth/Login";
 import PribetRoutes from "./PribetRoutes";
 import Profile from "../pages/profile/Profile";
 import Dashboard from "../pages/dashboard/Dashboard";
+import DashboardLayout from "../Layout/DashboardLayout";
+import Settings from "../pages/dashboard/pages/settings/Settings";
 
 export const router = createBrowserRouter([
   {
@@ -30,14 +32,33 @@ export const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: (
+          <PribetRoutes>
+            <Profile />
+          </PribetRoutes>
+        ),
       },
     ],
   },
   {
-    path: "dashboard",
-    element: <Dashboard />,
+    path: "/Dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: "dashboard",
+        element: (
+          <PribetRoutes>
+            <Dashboard />
+          </PribetRoutes>
+        ),
+      },
+      {
+        path: "settings",
+        element: <Settings />,
+      },
+    ],
   },
+
   {
     path: "/register",
     element: <Register />,

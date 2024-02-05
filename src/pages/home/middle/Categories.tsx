@@ -2,17 +2,25 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 import useFetchCategories from "../../../hooks/category/useFetchCategories";
+
+type CategoriesProps = {
+  handleCategoryIdSelected: (categoryId: string | undefined) => void;
+};
 type categoriesType = {
   _id: string;
   name: string;
   slug: string;
 };
+
 const category = [{ name: "All News" }];
 
-const Categories = () => {
+const Categories = ({ handleCategoryIdSelected }: CategoriesProps) => {
   const { categories } = useFetchCategories();
-  // console.log(categories);
   const [selected, setSelected] = useState(category[0]);
+
+  const handleSelectCategory = (id: string) => {
+    handleCategoryIdSelected(id);
+  };
 
   return (
     <div className="  w-7/12 mb-2">
@@ -36,6 +44,7 @@ const Categories = () => {
             <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white dark:border dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm">
               {categories?.payload?.map((category: categoriesType) => (
                 <Listbox.Option
+                  onClick={() => handleSelectCategory(category?._id)}
                   key={category?._id}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2  pl-10 pr-4 ${

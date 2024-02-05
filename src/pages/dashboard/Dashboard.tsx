@@ -1,7 +1,9 @@
+import Title from "../../components/dasboardTitle/Title";
+
 const Dashboard = () => {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <h1>Dashboard</h1>
+    <div className="h-screen">
+      <Title title="Dashboard" />
     </div>
   );
 };

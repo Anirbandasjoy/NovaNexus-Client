@@ -1,9 +1,11 @@
-import { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contex/AuthProvider";
+import { AuthContextType } from "../../helper/Type";
 
 interface MenuItemComponentProps {
   children: ReactNode;
@@ -12,15 +14,24 @@ interface MenuItemComponentProps {
 
 const DropDown = ({ userName }: { userName: string | null | undefined }) => {
   //   const [activeMenuItem, setActiveMenuItem] = useState("");
+  const { user } = useContext(AuthContext as React.Context<AuthContextType>);
 
   return (
     <div className="">
       <Menu as="div" className="relative inline-block text-left">
-        <div>
-          <Menu.Button className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
-            {userName ? userName?.slice(0, 2) : "D"}
-          </Menu.Button>
-        </div>
+        {user ? (
+          <div>
+            <Menu.Button className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+              {userName && userName?.slice(0, 2)}
+            </Menu.Button>
+          </div>
+        ) : (
+          <div>
+            <div className="font-bold cursor-pointer capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+              {"D"}
+            </div>
+          </div>
+        )}
         <Transition
           as={Fragment}
           enter="transition ease-out duration-100"

@@ -5,20 +5,32 @@ import { NewsType } from "../../../helper/Type";
 import NewsCardLoading from "../../../components/Loading/NewsCardLoading";
 import { useEffect, useState } from "react";
 import { FaExclamationCircle } from "react-icons/fa";
+
 const Middle = ({ categoryId }: { categoryId: string | undefined }) => {
   const { newsData, isLoading } = useFetchNews();
   const allNewsData = newsData?.payload;
   const [filteredNews, setFilteredNews] = useState<NewsType[]>(allNewsData);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<
+    string | undefined
+  >(categoryId);
+
+  const handleCategoryIdSelected = (id: string | undefined) => {
+    console.log(id);
+    setSelectedCategoryId(id);
+  };
 
   useEffect(() => {
     if (allNewsData) {
-      const filtered = categoryId
-        ? allNewsData?.filter((news: NewsType) => news.category === categoryId)
-        : allNewsData;
+      const filtered =
+        selectedCategoryId || categoryId
+          ? allNewsData?.filter(
+              (news: NewsType) =>
+                news.category === (selectedCategoryId || categoryId)
+            )
+          : allNewsData;
       setFilteredNews(filtered || []);
     }
-    console.log(categoryId);
-  }, [allNewsData, categoryId]);
+  }, [allNewsData, selectedCategoryId, categoryId]);
 
   if (isLoading) {
     return (
@@ -45,29 +57,17 @@ const Middle = ({ categoryId }: { categoryId: string | undefined }) => {
     );
   }
 
-  // console.log(filteredNews);
-  // console.log(categoryId);
-
   return (
     <div className="w-full">
       <div className="sm:hidden">
-        <Categories />
+        <Categories handleCategoryIdSelected={handleCategoryIdSelected} />
       </div>
       <div className="w-full sm:h-[calc(100vh-10px)] h-[calc(100vh-40px)] overflow-auto">
-        {isLoading && (
-          <div className="space-y-4">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <NewsCardLoading key={index} />
-            ))}
-          </div>
-        )}
-        {!isLoading && filteredNews && (
-          <div className="space-y-4">
-            {filteredNews.map((news: NewsType) => (
-              <NewsCard key={news?._id} news={news} />
-            ))}
-          </div>
-        )}
+        <div className="space-y-4">
+          {filteredNews.map((news: NewsType) => (
+            <NewsCard key={news?._id} news={news} />
+          ))}
+        </div>
       </div>
     </div>
   );
