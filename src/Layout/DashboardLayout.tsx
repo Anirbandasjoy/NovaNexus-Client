@@ -1,14 +1,32 @@
 import { Outlet } from "react-router-dom";
+import { RxHamburgerMenu } from "react-icons/rx";
 import SideMenu from "../pages/dashboard/SideMenu";
+import { useState } from "react";
 
 const DashboardLayout = () => {
+  const [sideOpen, setSideOpen] = useState(false);
   return (
     <div>
       <div className="flex">
-        <div className="sm:w-2/12 w-7/12 ">
+        <div
+          className={`sm:w-4/12 lg:w-2/12 w-6/12 duration-500 absolute sm:static ${
+            sideOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0 "
+          } `}
+        >
           <SideMenu />
         </div>
-        <div className="w-full pl-5 ">
+        <div className="w-full px-4 ">
+          <div className="flex justify-between items-center mt-5 sm:hidden">
+            <h1 className="text-lg font-semibold dark:text-gray-300">
+              NovaNexus
+            </h1>
+            <div
+              className="cursor-pointer"
+              onClick={() => setSideOpen(!sideOpen)}
+            >
+              <RxHamburgerMenu className="text-xl dark:text-gray-300 " />
+            </div>
+          </div>
           <Outlet />
         </div>
       </div>
