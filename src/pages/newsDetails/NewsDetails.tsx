@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import useFetchSignleNew from "../../hooks/news/useFetchSignleNew";
 import Marquee from "react-fast-marquee";
-import NewsCardLoading from "../../components/Loading/NewsCardLoading";
+import NewsCardLoading from "../../helper/Loading/NewsCardLoading";
 import { FaRegBookmark } from "react-icons/fa";
 import { DateTimeFormatOptions } from "../../helper/Type";
 import Comments from "./Comments";

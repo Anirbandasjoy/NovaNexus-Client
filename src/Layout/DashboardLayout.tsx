@@ -7,7 +7,7 @@ const DashboardLayout = () => {
   const [sideOpen, setSideOpen] = useState(false);
   return (
     <div>
-      <div className="flex">
+      <div className="flex min-h-screen">
         <div
           className={`sm:w-4/12 lg:w-2/12 w-6/12 duration-500 absolute sm:static ${
             sideOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0 "
@@ -27,7 +27,9 @@ const DashboardLayout = () => {
               <RxHamburgerMenu className="text-xl dark:text-gray-300 " />
             </div>
           </div>
-          <Outlet />
+          <div className="mt-5">
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

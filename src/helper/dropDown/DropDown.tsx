@@ -5,7 +5,7 @@ import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contex/AuthProvider";
-import { AuthContextType } from "../../helper/Type";
+import { AuthContextType } from "../Type";
 
 interface MenuItemComponentProps {
   children: ReactNode;

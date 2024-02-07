@@ -118,3 +118,11 @@ export type AuthInformation = {
   ) => Promise<UserCredential> | null;
   loginUser: (email: string, password: string) => Promise<UserCredential>;
 };
+
+// cateogry Types
+
+export type categoriesType = {
+  _id: string;
+  name: string;
+  slug: string;
+};

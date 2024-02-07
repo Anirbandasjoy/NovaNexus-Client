@@ -1,4 +1,4 @@
-import Title from "../../../../components/dasboardTitle/Title";
+import Title from "../../../../helper/dasboardTitle/Title";
 import useTheme from "../../../../hooks/theme/useTheme";
 
 const Settings = () => {

@@ -2,7 +2,7 @@ import useFetchNews from "../../../hooks/news/useFetchNews";
 import Categories from "./Categories";
 import NewsCard from "./NewsCard";
 import { NewsType } from "../../../helper/Type";
-import NewsCardLoading from "../../../components/Loading/NewsCardLoading";
+import NewsCardLoading from "../../../helper/Loading/NewsCardLoading";
 import { useEffect, useState } from "react";
 import { FaExclamationCircle } from "react-icons/fa";
 

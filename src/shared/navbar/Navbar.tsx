@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
-import ToggoleBtn from "../../components/toggleBtn/ToggleBtn";
+import ToggoleBtn from "../../helper/toggleBtn/ToggleBtn";
 import { useContext, useState } from "react";
-import DropDown from "../../components/dropDown/DropDown";
+import DropDown from "../../helper/dropDown/DropDown";
 import { AuthContext } from "../../contex/AuthProvider";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";

@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { AuthContextType, RegistationTypes } from "../../helper/Type";
 import { AuthContext } from "../../contex/AuthProvider";
-import RegistationLoading from "../../components/Loading/RegistationLoading";
+import RegistationLoading from "../../helper/Loading/RegistationLoading";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";

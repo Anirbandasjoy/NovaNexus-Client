@@ -1,8 +1,8 @@
-import Title from "../../components/dasboardTitle/Title";
+import Title from "../../helper/dasboardTitle/Title";
 
 const Dashboard = () => {
   return (
-    <div className="h-screen">
+    <div className="">
       <Title title="Dashboard" />
     </div>
   );

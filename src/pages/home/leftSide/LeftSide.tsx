@@ -12,12 +12,8 @@ import {
   FcEndCall,
   FcFrame,
 } from "react-icons/fc";
+import { categoriesType } from "../../../helper/Type";
 
-type categoriesType = {
-  _id: string;
-  name: string;
-  slug: string;
-};
 const LeftSide = ({
   getCategoryId,
 }: {
