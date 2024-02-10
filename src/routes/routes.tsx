@@ -11,7 +11,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Settings from "../pages/dashboard/pages/settings/Settings";
 import CreateNews from "../pages/dashboard/pages/news/CreateNews";
-import AllNews from "../pages/dashboard/pages/news/AllNews";
+import AllNews from "../pages/dashboard/pages/news/allNews/AllNews";
 import Users from "../pages/dashboard/pages/users/Users";
 
 export const router = createBrowserRouter([
