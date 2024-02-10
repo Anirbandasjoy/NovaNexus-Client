@@ -7,7 +7,7 @@ const Loading = () => {
   };
   const { View } = useLottie(options);
   return (
-    <div className="w-full flex h-screen items-center justify-center">
+    <div className="w-full flex h-screen dark:bg-gray-800 items-center justify-center">
       <div className="w-40">{View}</div>
     </div>
   );
