@@ -40,7 +40,7 @@ const SideMenu = () => {
   };
   return (
     <div>
-      <div className="border-gray-300 bg-gray-200 dark:bg-gray-900  border-r dark:border-gray-700 ">
+      <div className="border-gray-300 z-50 bg-gray-200 dark:bg-gray-900  border-r dark:border-gray-700 ">
         <Link to="/">
           <h1 className="text-lg font-bold text-center bg-blue-400 dark:text-gray-600 py-2 text-gray-500">
             NovaNexus

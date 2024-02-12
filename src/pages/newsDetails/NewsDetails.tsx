@@ -1,14 +1,16 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useFetchSignleNew from "../../hooks/news/useFetchSignleNew";
 import Marquee from "react-fast-marquee";
 import NewsCardLoading from "../../helper/Loading/NewsCardLoading";
-import { FaRegBookmark } from "react-icons/fa";
+
 import { DateTimeFormatOptions } from "../../helper/Type";
 import Comments from "./Comments";
+import { IoMdArrowDropleftCircle } from "react-icons/io";
 type ParamTypes = {
   id: string;
 };
 const NewsDetails = () => {
+  const navigate = useNavigate();
   const { id } = useParams<ParamTypes>();
   const { newsDetails, isLoading } = useFetchSignleNew(id);
   // console.log(newsDetails);
@@ -53,7 +55,12 @@ const NewsDetails = () => {
           </div>
         </div>
         <div>
-          <FaRegBookmark className="sm:text-2xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
+          <IoMdArrowDropleftCircle
+            className="sm:text-3xl text-xl cursor-pointer text-gray-600 dark:text-gray-300"
+            onClick={() => {
+              navigate(-1);
+            }}
+          />
         </div>
       </div>
       <div className="flex gap-2 flex-col ">
