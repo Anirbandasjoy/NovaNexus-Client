@@ -17,8 +17,6 @@ import {
 } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import React from "react";
-
 // import { useState } from "react";
 
 const NewsSchema = yup.object({
