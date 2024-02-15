@@ -101,10 +101,10 @@ export type AuthContextType = {
 // AuthUser
 export type AuthUser = {
   uid: string;
-  email: string | undefined;
+  email: string | undefined | null;
   emailVerified: boolean;
-  displayName: string | undefined;
-  photoURL: string | undefined;
+  displayName: string | undefined | null;
+  photoURL: string | undefined | null;
 };
 
 // AuthcontextType
