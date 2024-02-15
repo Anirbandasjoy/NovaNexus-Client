@@ -97,13 +97,14 @@ export type AuthContextType = {
   logOut: () => Promise<void>;
   loading: boolean;
 };
+
 // AuthUser
 export type AuthUser = {
   uid: string;
-  email: string | null;
+  email: string | undefined;
   emailVerified: boolean;
-  displayName: string | null;
-  photoURL: string | null;
+  displayName: string | undefined;
+  photoURL: string | undefined;
 };
 
 // AuthcontextType
@@ -126,3 +127,14 @@ export type categoriesType = {
   name: string;
   slug: string;
 };
+
+// export function authUserToUser(authUser: AuthUser): User {
+//   return {
+//     uid: authUser.uid,
+//     email: authUser.email,
+//     emailVerified: authUser.emailVerified,
+//     displayName: authUser.displayName,
+//     photoURL: authUser.photoURL,
+//     // Add other properties if needed
+//   };
+// }
