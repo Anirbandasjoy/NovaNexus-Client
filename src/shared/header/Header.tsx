@@ -18,7 +18,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="text-center mt-3">
+    <div className="text-center mt-3 hidden ">
       <img src={logo} className="mx-auto w-44 sm:w-72" alt="logo" />
       <p className="sm:text-lg mt-3 text-gray-500 dark:text-gray-400">
         Journalism Without Fear or Favour

@@ -21,13 +21,13 @@ const DropDown = ({ userName }: { userName: string | null | undefined }) => {
       <Menu as="div" className="relative inline-block text-left">
         {user ? (
           <div>
-            <Menu.Button className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+            <Menu.Button className="font-bold capitalize bg-blue-600 sm:h-10 sm:w-10 h-9 w-9 rounded-full text-xs sm:text-sm flex justify-center items-center text-white">
               {userName && userName?.slice(0, 2)}
             </Menu.Button>
           </div>
         ) : (
           <div>
-            <div className="font-bold cursor-pointer capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+            <div className="font-bold cursor-pointer capitalize bg-blue-600 sm:h-10 sm:w-10 h-9 w-9 rounded-full text-xs sm:text-sm flex justify-center items-center text-white">
               {"D"}
             </div>
           </div>

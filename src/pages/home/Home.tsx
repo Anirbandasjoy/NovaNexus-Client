@@ -2,6 +2,7 @@ import { useState } from "react";
 import LeftSide from "./leftSide/LeftSide";
 import Middle from "./middle/Middle";
 import RightSide from "./rightSide/RightSide";
+import Bottombar from "@/shared/bottomBar/Bottombar";
 
 const Home = () => {
   const [categoryId, setCategoryId] = useState<string | undefined>(undefined);
@@ -9,12 +10,13 @@ const Home = () => {
     setCategoryId(id);
   };
   return (
-    <div className="sm:mt-4 ">
+    <div className="sm:mt-2 relative">
       <div className="flex gap-8">
         <LeftSide getCategoryId={getCategoryId} />
         <Middle categoryId={categoryId} />
         <RightSide />
       </div>
+      <Bottombar />
     </div>
   );
 };
