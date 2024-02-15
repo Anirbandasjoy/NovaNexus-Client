@@ -22,7 +22,7 @@ const profileEditSchema = yup.object({
 const Profile = () => {
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
 
-  const [profilePic, setProfilePic] = useState<string | undefined>(
+  const [profilePic, setProfilePic] = useState<string | null | undefined>(
     user?.photoURL
   );
   const [profileUploadLoading, setProfileUploadLoading] =
@@ -102,10 +102,11 @@ const Profile = () => {
                     <div className="flex flex-col gap-1 w-9/12 mx-auto">
                       <input
                         {...register("name")}
-                        defaultValue={user?.displayName}
+                        defaultValue={user?.displayName || ""}
                         type="text"
                         className="py-3 bg-[#ecf0f1] px-3  border-gray-300 border dark:text-white dark:bg-gray-800  dark:border-gray-600  outline-none text-sm rounded-md"
                       />
+
                       <p className="text-red-500 text-xs dark:text-red-400 font-semibold">
                         {" "}
                         {errors.name?.message}
