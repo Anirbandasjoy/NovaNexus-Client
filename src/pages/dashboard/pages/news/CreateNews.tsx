@@ -24,7 +24,6 @@ import React from "react";
 const NewsSchema = yup.object({
   title: yup.string().required(),
   details: yup.string().required(),
-  select: yup.string().required(),
 });
 
 const CreateNews = () => {
@@ -44,9 +43,7 @@ const CreateNews = () => {
   const onSubmit = (data: NewsFormValueType) => {
     console.log(data);
   };
-  const doSomething = (value: string) => {
-    console.log(value);
-  };
+
   return (
     <div>
       <Title title="Post News" />
@@ -66,12 +63,7 @@ const CreateNews = () => {
               </p>
             </div>
             <div className="flex flex-col gap-1 w-full ">
-              <Select
-                {...register("select")}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  doSomething(e.target.value)
-                }
-              >
+              <Select>
                 <SelectTrigger className="focus:outline-none py-3 bg-[#ecf0f1] px-3  border-gray-300 border text-gray-400 dark:text-gray-400 dark:bg-gray-800  dark:border-gray-600   text-sm rounded-md">
                   <SelectValue
                     className="dark:text-gray-600 focus:outline-none"
