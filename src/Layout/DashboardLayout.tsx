@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import SideMenu from "../pages/dashboard/SideMenu";
 import { useState } from "react";
+import { IoMdClose } from "react-icons/io";
 
 const DashboardLayout = () => {
   const [sideOpen, setSideOpen] = useState(false);
@@ -24,7 +25,11 @@ const DashboardLayout = () => {
               className="cursor-pointer"
               onClick={() => setSideOpen(!sideOpen)}
             >
-              <RxHamburgerMenu className="text-xl dark:text-gray-300 " />
+              {sideOpen ? (
+                <IoMdClose className="text-xl dark:text-gray-300" />
+              ) : (
+                <RxHamburgerMenu className="text-xl dark:text-gray-300" />
+              )}
             </div>
           </div>
           <div className="mt-5">
