@@ -11,6 +11,7 @@ import { useAxios } from "../../hooks/axios/useAxios";
 import useFetchSignleNew from "../../hooks/news/useFetchSignleNew";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contex/AuthProvider";
+import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
 const Comments = ({
   payload,
   formatDate,
@@ -21,6 +22,9 @@ const Comments = ({
   const { user, loading } = useContext(
     AuthContext as React.Context<AuthContextType>
   );
+
+  const { sigleUserProfile } = useGetSingleUserProfile(user?.email);
+  console.log(sigleUserProfile);
 
   const [inputStr, setInputStr] = useState("");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
