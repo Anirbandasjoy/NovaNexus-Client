@@ -98,6 +98,8 @@ export type AuthContextType = {
   loading: boolean;
 };
 
+// USer Type
+
 // AuthUser
 export type AuthUser = {
   uid: string;

@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { updateProfile } from "firebase/auth";
 import { uploadImage } from "@/api";
+import { useAxios } from "@/hooks/axios/useAxios";
 type EditeProfileType = {
   name: string;
 };
@@ -21,6 +22,7 @@ const profileEditSchema = yup.object({
 });
 const Profile = () => {
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
+  const { axiosInstance } = useAxios();
 
   const [profilePic, setProfilePic] = useState<string | null | undefined>(
     user?.photoURL
@@ -53,6 +55,15 @@ const Profile = () => {
           displayName: data.name,
           photoURL: profilePic,
         });
+
+        const { data: updatedUserData } = await axiosInstance.put(
+          `/profile/update/${user.email}`,
+          {
+            fullName: data?.name,
+            profileImage: profilePic,
+          }
+        );
+        console.log(updatedUserData);
       }
       setProfileEditLoading(false);
       reset();

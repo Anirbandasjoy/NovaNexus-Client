@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
 import { uploadImage } from "../../api";
 import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
+import { useAxios } from "@/hooks/axios/useAxios";
 const schema = yup.object({
   fullname: yup.string().required(),
   email: yup.string().email().required(),
@@ -26,6 +27,7 @@ const schema = yup.object({
 
 const Register = () => {
   const navigate = useNavigate();
+  const { axiosInstance } = useAxios();
   const { registerUser } = useContext(
     AuthContext as React.Context<AuthContextType>
   );
@@ -72,6 +74,15 @@ const Register = () => {
         displayName: data?.fullname,
         photoURL: profilePic,
       });
+
+      const { data: registrationData } = await axiosInstance.post("/profile", {
+        fullName: data?.fullname,
+        email: data?.email,
+        profileImage: profilePic || null,
+        role: "user",
+      });
+
+      console.log(registrationData);
       console.log(user);
       setLoading(false);
       toast.success("Registation Successfully");
@@ -128,7 +139,7 @@ const Register = () => {
                 </div>
                 <div className="flex flex-col gap-1 w-full relative">
                   <input
-                    type="password"
+                    type={showPassword ? "password" : "text"}
                     {...register("password")}
                     placeholder="Password"
                     className="py-3 bg-[#ecf0f1] px-3  border-gray-300 border dark:text-white dark:bg-gray-800  dark:border-gray-600  outline-none text-sm rounded-md"
