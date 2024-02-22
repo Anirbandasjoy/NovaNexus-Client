@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { UserCredential } from "firebase/auth";
 
 // profile Type
@@ -100,7 +101,7 @@ export type LoginTypes = {
 };
 // AuthcontextType
 export type AuthContextType = {
-  user: AuthUser | null;
+  user: AuthUser | any;
   googleUserLogin: () => Promise<UserCredential>;
   registerUser: (email: string, password: string) => Promise<UserCredential>;
   loginUser: (email: string, password: string) => Promise<UserCredential>;
