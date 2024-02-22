@@ -126,8 +126,8 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
 
           {/* modal start  */}
           <div>
-            <Drawer className="w-full ">
-              <DrawerTrigger className="w-full">
+            <Drawer>
+              <DrawerTrigger>
                 <div className="flex items-center lg:px-7 gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200">
                   <BiComment className="text-[21px] w-full text-gray-500 dark:text-gray-300" />
                   <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">
@@ -136,10 +136,12 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                 </div>
               </DrawerTrigger>
               <DrawerContent>
-                <DrawerHeader className="lg:w-6/12 w-full mx-auto ">
+                <DrawerHeader>
                   {/* <Textarea className="bg-gray-200" /> */}
-                  <div className="h-[70vh] overflow-auto">
-                    <Comments payload={news} formatDate={formatDate} />
+                  <div className="lg:w-6/12 w-full mx-auto ">
+                    <div className="h-[70vh] overflow-auto">
+                      <Comments payload={news} formatDate={formatDate} />
+                    </div>
                   </div>
                 </DrawerHeader>
               </DrawerContent>
