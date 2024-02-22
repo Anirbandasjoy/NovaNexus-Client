@@ -12,11 +12,12 @@ import useFetchSignleNew from "../../hooks/news/useFetchSignleNew";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contex/AuthProvider";
 import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
+// import { useNavigate } from "react-router-dom";
 const Comments = ({
   payload,
   formatDate,
 }: {
-  payload: NewsType;
+  payload: NewsType | undefined;
   formatDate: (dateString: string | undefined) => string;
 }) => {
   const { user, loading } = useContext(
@@ -24,8 +25,7 @@ const Comments = ({
   );
 
   const { sigleUserProfile } = useGetSingleUserProfile(user?.email);
-  console.log(sigleUserProfile);
-
+  // const navigate = useNavigate();
   const [inputStr, setInputStr] = useState("");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showPicker, setShowPicker] = useState(false);
@@ -63,14 +63,12 @@ const Comments = ({
   const newsId = payload?._id;
   const { axiosInstance } = useAxios();
   const { refetch } = useFetchSignleNew(newsId);
-  // console.log(id);
 
   const handleUploadComment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!loading) {
       const commentBody = {
-        name: user?.displayName,
-        profileImage: user?.photoURL,
+        profileId: sigleUserProfile?.payload?._id,
         commentImage: selectedImage,
         commentText: inputStr,
       };
@@ -84,6 +82,7 @@ const Comments = ({
       setSelectedImage(null);
       refetch();
       toast.success("Create a new comment");
+      // navigate(`/news-details/${payload?._id}`);
     }
   };
   const handleDeleteComment = async (id: string) => {
@@ -95,6 +94,7 @@ const Comments = ({
       console.log(data);
       toast.success("Deleting this comment");
       refetch();
+      // navigate(`/news-details/${payload?._id}`);
     } catch (error) {
       console.error("Error deleting comment:", error);
       toast.error("Failed to delete comment❌");
@@ -211,17 +211,17 @@ const Comments = ({
           {payload?.comments?.map((comment: CommentType) => {
             return (
               <div className="flex gap-4 w-full" key={comment?._id}>
-                {comment?.profileImage === null ? (
+                {comment?.profileId?.profileImage === null ? (
                   <div>
                     <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
-                      {comment?.name?.slice(0, 2)}
+                      {comment?.profileId?.fullName?.slice(0, 2)}
                     </div>
                   </div>
                 ) : (
                   <div className="w-11 h-11 ">
                     <img
                       className="w-full h-full rounded-full cursor-pointer"
-                      src={comment?.profileImage}
+                      src={comment?.profileId?.profileImage}
                       alt="profile"
                     />
                   </div>
@@ -230,9 +230,9 @@ const Comments = ({
                 <div className="w-8/12">
                   <div className="flex gap-2">
                     <h1 className="sm:text-[16px]  dark:text-gray-300 text-gray-600 font-bold">
-                      {comment?.name}
+                      {comment?.profileId?.fullName}
                     </h1>
-                    {user?.displayName === comment?.name && (
+                    {user?.displayName === comment?.profileId?.fullName && (
                       <RiDeleteBin6Line
                         onClick={() => handleDeleteComment(comment?._id)}
                         className="dark:text-gray-300 text-gray-600 cursor-pointer font-bold"

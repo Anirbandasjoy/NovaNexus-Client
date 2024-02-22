@@ -30,7 +30,6 @@ const Profile = () => {
   const [profileUploadLoading, setProfileUploadLoading] =
     useState<boolean>(false);
   const [profileEditLoading, setProfileEditLoading] = useState<boolean>(false);
-  console.log(profilePic);
 
   const {
     handleSubmit,
@@ -41,10 +40,15 @@ const Profile = () => {
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setProfileUploadLoading(true);
-      const profileImageURL = await uploadImage(file);
-      setProfilePic(profileImageURL);
-      setProfileUploadLoading(false);
+      try {
+        setProfileUploadLoading(true);
+        const profileImageURL = await uploadImage(file);
+        setProfilePic(profileImageURL);
+        setProfileUploadLoading(false);
+      } catch (error) {
+        console.log(error);
+        setProfileUploadLoading(false);
+      }
     }
   };
   const onSubmit = async (data: EditeProfileType) => {

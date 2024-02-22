@@ -46,7 +46,7 @@ const ApprovedNews = () => {
             <TableCell className="text-center">
               <DropdownMenu>
                 <DropdownMenuTrigger className="bg-blue-400 dark:text-white text-gray-900 text-sm px-3 py-1 rounded-sm font-normal">
-                  Status
+                  Change Status
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem onClick={handleApprovedNews}>

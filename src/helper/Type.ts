@@ -1,12 +1,19 @@
 import { UserCredential } from "firebase/auth";
 
+// profile Type
+type ProfileType = {
+  email: string;
+  profileImage: string;
+  fullName: string;
+  createdAt: string;
+  role: string;
+};
 // News Types
 export type CommentType = {
   _id: string;
-  name: string;
-  profileImage: string;
   commentImage: string;
   commentText: string;
+  profileId: ProfileType;
   createdAt: string;
   updatedAt: string;
   __v: number;
@@ -26,6 +33,7 @@ export type NewsIdType = {
   category: string;
   createdAt: string;
   updatedAt: string;
+  profileId: ProfileType;
   __v: number;
 };
 
@@ -47,6 +55,8 @@ export type NewsType = {
   thumbnail_url: string;
   details: string;
   comments: CommentType[];
+  profileId: ProfileType;
+  status: string;
   category: string;
   createdAt: string;
   updatedAt: string;

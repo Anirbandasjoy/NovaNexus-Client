@@ -13,8 +13,7 @@ const NewsDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams<ParamTypes>();
   const { newsDetails, isLoading } = useFetchSignleNew(id);
-  // console.log(newsDetails);
-  // console.log(id);
+  console.log(newsDetails);
   const { payload } = newsDetails || {};
   const formatDate = (dateString: string | undefined) => {
     if (!dateString) return "";
@@ -38,19 +37,27 @@ const NewsDetails = () => {
     <div className="mt-3 pb-14">
       <div className="flex items-center mb-2 px-5   justify-between bg-gray-300 py-2 dark:bg-gray-800  dark:border dark:border-gray-700  sm:text-lg dark:text-gray-300 text-center text-gray-700  font-bold ">
         <div className="flex gap-3">
-          <div className="w-11">
-            <img
-              className="w-full h-full rounded-full cursor-pointer"
-              src={payload?.author?.image}
-              alt="profile"
-            />
-          </div>
+          {payload?.profileId.profileImage === null ? (
+            <div>
+              <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+                {payload?.profileId?.fullName?.slice(0, 2)}
+              </div>
+            </div>
+          ) : (
+            <div className="w-11">
+              <img
+                className="w-full h-full rounded-full cursor-pointer"
+                src={payload?.profileId?.profileImage}
+                alt="profile"
+              />
+            </div>
+          )}
           <div>
             <h1 className="font-semibold text-left text-gray-600 dark:text-gray-300">
-              {payload?.author?.name}
+              {payload?.profileId?.fullName}
             </h1>
             <h2 className="text-xs text-gray-600  text-left dark:text-gray-300">
-              {formatDate(payload?.author?.publishDate)}
+              {formatDate(payload?.profileId?.createdAt)}
             </h2>
           </div>
         </div>
@@ -79,8 +86,9 @@ const NewsDetails = () => {
               className="font-bold text-meduim sm:text-lg  text-gray-100  "
               speed={100}
             >
-              Match Highlights: Germany vs Spain — as it happened ! Match
-              Highlights: Germany vs Spain as...
+              {payload?.title}
+              {/* Match Highlights: Germany vs Spain — as it happened ! Match
+              Highlights: Germany vs Spain as... */}
             </Marquee>
           </div>
           <div className="mt-2">

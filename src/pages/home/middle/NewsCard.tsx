@@ -6,6 +6,14 @@ import { useAxios } from "../../../hooks/axios/useAxios";
 import toast from "react-hot-toast";
 import useFetchNewsBookmark from "../../../hooks/newBookmark/useFetchNewsBookmark";
 import ShareNews from "./ShareNews";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+
+import Comments from "@/pages/newsDetails/Comments";
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
   const { axiosInstance } = useAxios();
@@ -44,19 +52,27 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
         <div className="p-4 space-y-3">
           <div className="flex items-center  justify-between">
             <div className="flex gap-3">
-              <div className="w-11">
-                <img
-                  className="w-full h-full rounded-full cursor-pointer"
-                  src={news?.author?.image}
-                  alt="profile"
-                />
-              </div>
+              {news?.profileId?.profileImage === null ? (
+                <div>
+                  <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+                    {news?.profileId?.fullName?.slice(0, 2)}
+                  </div>
+                </div>
+              ) : (
+                <div className="w-11">
+                  <img
+                    className="w-full h-full rounded-full cursor-pointer"
+                    src={news?.profileId?.profileImage}
+                    alt="profile"
+                  />
+                </div>
+              )}
               <div>
                 <h1 className="font-semibold text-gray-600 dark:text-gray-300">
-                  {news?.author?.name}
+                  {news?.profileId?.fullName}
                 </h1>
                 <h2 className="text-xs text-gray-600 dark:text-gray-300">
-                  {formatDate(news?.author?.publishDate)}
+                  {formatDate(news?.profileId?.createdAt)}
                 </h2>
               </div>
             </div>
@@ -66,8 +82,9 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
           </div>
           <div>
             <h1 className="text-sm font-semibold  text-gray-600 dark:text-gray-300">
-              Biden Pledges Nearly $3 Billion To Ukraine In Largest U.S.
-              Military Aid Package Yet
+              {news?.title}
+              {/* Biden Pledges Nearly $3 Billion To Ukraine In Largest U.S.
+              Military Aid Package Yet */}
             </h1>
           </div>
         </div>
@@ -100,12 +117,36 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
               Like
             </p>
           </div>
-          <div className="flex items-center gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200">
+          {/* <div className="flex items-center gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200">
             <BiComment className="text-[21px] text-gray-500 dark:text-gray-300" />
             <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">
               Comment
             </p>
+          </div> */}
+
+          {/* modal start  */}
+          <div>
+            <Drawer className="w-full ">
+              <DrawerTrigger className="w-full">
+                <div className="flex items-center lg:px-7 gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200">
+                  <BiComment className="text-[21px] w-full text-gray-500 dark:text-gray-300" />
+                  <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">
+                    Comment
+                  </p>
+                </div>
+              </DrawerTrigger>
+              <DrawerContent>
+                <DrawerHeader className="lg:w-6/12 w-full mx-auto ">
+                  {/* <Textarea className="bg-gray-200" /> */}
+                  <div className="h-[70vh] overflow-auto">
+                    <Comments payload={news} formatDate={formatDate} />
+                  </div>
+                </DrawerHeader>
+              </DrawerContent>
+            </Drawer>
           </div>
+          {/* modal end  */}
+
           <ShareNews
             shareURL={
               `https://novanexus.vercel.app/news-details/${news?._id}` || null

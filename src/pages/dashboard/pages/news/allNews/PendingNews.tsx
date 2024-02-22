@@ -51,15 +51,15 @@ const PendingNews = () => {
                     alt={news?.title}
                   />
                 </TableCell>
-                <TableCell>Pending</TableCell>
-                <TableCell>{news?.author?.name}</TableCell>
+                <TableCell>{news?.status}</TableCell>
+                <TableCell>{news?.profileId?.fullName}</TableCell>
                 <TableCell className="text-blue-600 hover:underline cursor-pointer">
                   <Link to={`/news-details/${news?._id}`}>Lear More</Link>
                 </TableCell>
                 <TableCell className="text-center">
                   <DropdownMenu>
                     <DropdownMenuTrigger className="bg-blue-400 dark:text-white text-gray-900 text-sm px-3 py-1 rounded-sm font-normal">
-                      Status
+                      Change Status
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
                       <DropdownMenuItem onClick={handleApprovedNews}>
