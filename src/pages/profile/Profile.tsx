@@ -14,6 +14,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { updateProfile } from "firebase/auth";
 import { uploadImage } from "@/api";
 import { useAxios } from "@/hooks/axios/useAxios";
+import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
+import { Link, useParams } from "react-router-dom";
+
 type EditeProfileType = {
   name: string;
 };
@@ -23,6 +26,10 @@ const profileEditSchema = yup.object({
 const Profile = () => {
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const { axiosInstance } = useAxios();
+  const { email } = useParams();
+  console.log("paramsId", email);
+  const { sigleUserProfile, refetch } = useGetSingleUserProfile(email);
+  const singleUserInfo = sigleUserProfile?.payload;
 
   const [profilePic, setProfilePic] = useState<string | null | undefined>(
     user?.photoURL
@@ -71,6 +78,7 @@ const Profile = () => {
       }
       setProfileEditLoading(false);
       reset();
+      refetch();
     } catch (error) {
       setProfileEditLoading(false);
       console.log(error);
@@ -78,37 +86,43 @@ const Profile = () => {
   };
   return (
     <div className="sm:mt-2 mt-4">
-      <div className="sm:w-3/12 w-full  bg-white dark:bg-gray-800 rounded-md h-64 shadow-sm flex justify-center ">
+      <div className="sm:w-3/12 w-full  bg-white dark:bg-gray-800 rounded-md min-h-64 shadow-sm flex justify-center ">
         <div className="mt-7">
           <div className="w-20 h-20 mx-auto ring-offset-2 ring-8 rounded-full ">
-            {user?.photoURL ? (
+            {singleUserInfo?.profileImage ? (
               <img
                 className="w-full  h-full rounded-full  bg-contain"
-                src={user?.photoURL}
+                src={singleUserInfo?.profileImage}
                 alt=""
               />
             ) : (
               <div className="font-bold capitalize bg-blue-600 sm:h-fullsm:w-full h-full w-full rounded-full text-xl flex justify-center items-center text-white">
-                {user && user?.displayName?.slice(0, 2)}
+                {singleUserInfo && singleUserInfo?.fullName?.slice(0, 2)}
               </div>
             )}
           </div>
           <div className="mt-6 space-y-2 text-center">
             <h1 className="text-xl font-extrabold text-purple-400">
-              {user?.displayName}
+              {singleUserInfo?.fullName}
             </h1>
             <h2 className="font-bold text-[15px] text-[#736980]">
-              {user?.email}
+              {singleUserInfo?.email}
             </h2>
 
             {/* Edit Button modal code start */}
             <div>
               <AlertDialog>
-                <AlertDialogTrigger>
-                  <button className="text-sm text-white font-bold rounded-sm textw bg-red-500 px-3 py-2">
-                    Edit Profile
+                {user?.email === singleUserInfo?.email ? (
+                  <AlertDialogTrigger>
+                    <button className="text-sm text-white font-bold rounded-sm textw bg-red-500 px-3 py-2">
+                      Edit Profile
+                    </button>
+                  </AlertDialogTrigger>
+                ) : (
+                  <button className="text-sm text-white font-bold rounded-sm textw bg-green-500 px-3 py-2">
+                    <Link to="/">back to home</Link>
                   </button>
-                </AlertDialogTrigger>
+                )}
                 <AlertDialogContent>
                   <form className="space-y-3" onSubmit={handleSubmit(onSubmit)}>
                     <h1 className="text-xl w-9/12 mx-auto font-semibold text-gray-500 dark:text-gray-400">

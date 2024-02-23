@@ -51,7 +51,10 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
       <div className="bg-white  rounded-md pb-4 dark:border dark:border-gray-700 dark:bg-gray-800">
         <div className="p-4 space-y-3">
           <div className="flex items-center  justify-between">
-            <div className="flex gap-3">
+            <Link
+              to={`/profile/${news?.profileId?.email}`}
+              className="flex gap-3"
+            >
               {news?.profileId?.profileImage === null ? (
                 <div>
                   <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
@@ -75,7 +78,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                   {formatDate(news?.profileId?.createdAt)}
                 </h2>
               </div>
-            </div>
+            </Link>
             <div onClick={() => handleCreateBookmark(news?._id)}>
               <FaRegBookmark className="sm:text-2xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
             </div>

@@ -44,7 +44,7 @@ const DropDown = ({ userName }: { userName: string | null | undefined }) => {
           <Menu.Items className="border-gray-300 z-30 border sm:border-none dark:border-gray-600  absolute right-0 mt-3 w-44 origin-top-right divide-y divide-gray-100 rounded-md bg-white dark:bg-gray-800 dark:text-white shadow-lg ring-1 ring-black/5 focus:outline-none">
             <div className="px-1 py-1 ">
               <Menu.Item>
-                <MenuItem path="/profile">
+                <MenuItem path={`/profile/${user?.email}`}>
                   <CgProfile
                     className="mr-2 h-5 w-5 dark:text-white"
                     aria-hidden="true"

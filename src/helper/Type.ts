@@ -8,6 +8,7 @@ type ProfileType = {
   fullName: string;
   createdAt: string;
   role: string;
+  _id: string;
 };
 // News Types
 export type CommentType = {
