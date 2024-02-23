@@ -1,7 +1,11 @@
 import { FaRegBookmark } from "react-icons/fa";
 import { BiComment, BiLike } from "react-icons/bi";
-import { DateTimeFormatOptions, NewsType } from "../../../helper/Type";
-import { Link } from "react-router-dom";
+import {
+  AuthContextType,
+  DateTimeFormatOptions,
+  NewsType,
+} from "../../../helper/Type";
+import { Link, useNavigate } from "react-router-dom";
 import { useAxios } from "../../../hooks/axios/useAxios";
 import toast from "react-hot-toast";
 import useFetchNewsBookmark from "../../../hooks/newBookmark/useFetchNewsBookmark";
@@ -14,10 +18,14 @@ import {
 } from "@/components/ui/drawer";
 
 import Comments from "@/pages/newsDetails/Comments";
+import React, { useContext } from "react";
+import { AuthContext } from "@/contex/AuthProvider";
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
+  const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const { axiosInstance } = useAxios();
   const { refetch } = useFetchNewsBookmark();
+  const navigate = useNavigate();
   const formatDate = (dateString: string | undefined) => {
     if (!dateString) return "";
 
@@ -45,6 +53,9 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
       // console.log(error.message);
       toast.error("News already exists");
     }
+  };
+  const handleCommentNavigate = () => {
+    navigate("/login");
   };
   return (
     <div className="">
@@ -128,28 +139,40 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
           </div> */}
 
           {/* modal start  */}
-          <div>
-            <Drawer>
-              <DrawerTrigger>
-                <div className="flex items-center lg:px-7 gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200">
-                  <BiComment className="text-[21px] w-full text-gray-500 dark:text-gray-300" />
-                  <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">
-                    Comment
-                  </p>
-                </div>
-              </DrawerTrigger>
-              <DrawerContent>
-                <DrawerHeader>
-                  {/* <Textarea className="bg-gray-200" /> */}
-                  <div className="lg:w-6/12 w-full mx-auto ">
-                    <div className="h-[70vh] overflow-auto">
-                      <Comments payload={news} formatDate={formatDate} />
-                    </div>
+          {user ? (
+            <div>
+              <Drawer>
+                <DrawerTrigger>
+                  <div className="flex items-center lg:px-7 gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200">
+                    <BiComment className="text-[21px] w-full text-gray-500 dark:text-gray-300" />
+                    <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">
+                      Comment
+                    </p>
                   </div>
-                </DrawerHeader>
-              </DrawerContent>
-            </Drawer>
-          </div>
+                </DrawerTrigger>
+                <DrawerContent>
+                  <DrawerHeader>
+                    {/* <Textarea className="bg-gray-200" /> */}
+                    <div className="lg:w-6/12 w-full mx-auto ">
+                      <div className="h-[70vh] overflow-auto">
+                        <Comments payload={news} formatDate={formatDate} />
+                      </div>
+                    </div>
+                  </DrawerHeader>
+                </DrawerContent>
+              </Drawer>
+            </div>
+          ) : (
+            <div
+              onClick={handleCommentNavigate}
+              className="flex items-center gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200"
+            >
+              <BiComment className="text-[21px] text-gray-500 dark:text-gray-300" />
+              <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">
+                Comment
+              </p>
+            </div>
+          )}
           {/* modal end  */}
 
           <ShareNews
