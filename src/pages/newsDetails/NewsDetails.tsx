@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useFetchSignleNew from "../../hooks/news/useFetchSignleNew";
 import Marquee from "react-fast-marquee";
 import NewsCardLoading from "../../helper/Loading/NewsCardLoading";
@@ -36,7 +36,10 @@ const NewsDetails = () => {
   return (
     <div className="mt-3 pb-14">
       <div className="flex items-center mb-2 px-5   justify-between bg-gray-300 py-2 dark:bg-gray-800  dark:border dark:border-gray-700  sm:text-lg dark:text-gray-300 text-center text-gray-700  font-bold ">
-        <div className="flex gap-3">
+        <Link
+          to={`/profile/${payload?.profileId?.email}`}
+          className="flex gap-3"
+        >
           {payload?.profileId.profileImage === null ? (
             <div>
               <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
@@ -60,7 +63,7 @@ const NewsDetails = () => {
               {formatDate(payload?.profileId?.createdAt)}
             </h2>
           </div>
-        </div>
+        </Link>
         <div>
           <IoMdArrowDropleftCircle
             className="sm:text-3xl text-xl cursor-pointer text-gray-600 dark:text-gray-300"
