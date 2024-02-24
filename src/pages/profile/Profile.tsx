@@ -123,12 +123,12 @@ const Profile = () => {
   return (
     <div className="flex gap-5 flex-col sm:flex-row">
       <div className="w-full ">
-        <div className="sm:mt-2 mt-4 relative gap-5 w-full  h-[26rem]">
+        <div className="sm:mt-2 mt-4 relative gap-5 w-full  h-[32rem]">
           <div className="dark:bg-gray-700 bg-gray-100 h-full  w-full rounded-md">
             {singleUserInfo?.backgroundImage && (
               <div className="w-full  h-full rounded-md bg-auto">
                 <img
-                  className="w-full h-full "
+                  className="w-full h-full object-cover"
                   src={singleUserInfo?.backgroundImage}
                   alt=""
                 />
