@@ -30,12 +30,15 @@ import {
 import { MdOutlineDeleteOutline } from "react-icons/md";
 import { LuBookmarkPlus } from "react-icons/lu";
 import useFetchNews from "@/hooks/news/useFetchNews";
+import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const { axiosInstance } = useAxios();
   const { refetch } = useFetchNewsBookmark();
   const { refetch: newsRefetch } = useFetchNews();
+  const { sigleUserProfile } = useGetSingleUserProfile(user?.email);
+  const userId = sigleUserProfile?.payload?._id;
   const navigate = useNavigate();
   const formatDate = (dateString: string | undefined) => {
     if (!dateString) return "";
@@ -57,14 +60,16 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
       const toastId = toast.loading("Creating bookmark...");
       const { data } = await axiosInstance.post("/news-bookmark", {
         newsId: id,
+        profileId: userId,
       });
       console.log(data);
-      toast.success("Create a new Bookmark", {
+      toast.success("Created a new Bookmark", {
         id: toastId,
       });
       refetch();
     } catch (error) {
       console.log(error);
+      toast.dismiss();
       toast.error("News already exists");
     }
   };

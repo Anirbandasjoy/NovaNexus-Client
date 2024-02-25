@@ -1,10 +1,16 @@
 import { IoMdClose } from "react-icons/io";
 import useFetchNewsBookmark from "../../../hooks/newBookmark/useFetchNewsBookmark";
-import { NewsType } from "../../../helper/Type";
+import { AuthContextType, NewsType } from "../../../helper/Type";
+import { SiZeromq } from "react-icons/si";
 import toast from "react-hot-toast";
 import { useAxios } from "../../../hooks/axios/useAxios";
 import { LuBookmarkPlus } from "react-icons/lu";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "@/contex/AuthProvider";
+import { Link } from "react-router-dom";
 const RightSide = () => {
+  const { user } = useContext(AuthContext as React.Context<AuthContextType>);
+  const [filterBookmarkData, setFilterBookmarkData] = useState([]);
   const { bookmarkNews, refetch } = useFetchNewsBookmark();
   const { axiosInstance } = useAxios();
   const handleDeleteBookmarkNews = async (id: string) => {
@@ -21,6 +27,13 @@ const RightSide = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const filterData = bookmarkNews?.payload?.filter(
+      (news: NewsType) => news?.profileId?.email === user?.email
+    );
+    setFilterBookmarkData(filterData);
+  }, [bookmarkNews?.payload, user?.email]);
   // console.log(bookmarkNews);
   return (
     <div className=" dark:text-gray-300 hidden sm:block w-5/12 ">
@@ -28,27 +41,43 @@ const RightSide = () => {
         <LuBookmarkPlus className="sm:text-xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
         <h1 className="tex-lg sm:text-lg  font-bold ">All Bookmarks</h1>
       </div>
-      <div className="mt-5 w-full sm:h-[calc(100vh-72px)] h-[calc(100vh-50px)] overflow-auto space-y-3">
-        {bookmarkNews?.payload?.map((news: NewsType) => {
-          return (
-            <div
-              key={news?._id}
-              className=" bg-gray-300  dark:bg-gray-800  dark:border dark:border-gray-700   dark:text-gray-300 text-center text-gray-700  font-bold  "
-            >
-              <div className="w-full cursor-pointer relative">
-                <img src={news?.newsId?.thumbnail_url} alt="NewsImage" />
+      {filterBookmarkData?.length === 0 ? (
+        <div className="flex justify-center mt-4 bg-blue-100 py-14">
+          <div className="flex flex-col gap-2 items-center justify-center w-full ">
+            <SiZeromq className="text-red-500" />
+            <h1 className="text-red-500 font-bold text-lg">Not Added</h1>
+          </div>
+        </div>
+      ) : (
+        <div className="mt-5 w-full sm:h-[calc(100vh-72px)] h-[calc(100vh-50px)] overflow-auto space-y-3">
+          {filterBookmarkData?.map((news: NewsType) => {
+            return (
+              <div
+                key={news?._id}
+                className=" bg-gray-300  relative dark:bg-gray-800  dark:border dark:border-gray-700   dark:text-gray-300  flex text-center text-gray-700  font-bold  "
+              >
+                <div className="w-14 h-14 cursor-pointer ">
+                  <img
+                    className="w-full h-full rounded-sm"
+                    src={news?.newsId?.thumbnail_url}
+                    alt="NewsImage"
+                  />
+                </div>
+                <Link
+                  to={`/news-details/${news?.newsId?._id}`}
+                  className="py-2 text-left ml-4 hover:underline text-blue-600"
+                >
+                  {news?.newsId?.title?.slice(0, 15)}...
+                </Link>
                 <IoMdClose
-                  className="text-xl bg-white text-gray-600 rounded-sm p-[1px] absolute top-0 right-0"
+                  className="text-xl bg-white cursor-pointer text-gray-600 rounded-sm p-[1px] absolute top-0 right-0"
                   onClick={() => handleDeleteBookmarkNews(news?._id)}
                 />
               </div>
-              <h1 className="py-2 text-left ml-4">
-                {news?.newsId?.title?.slice(0, 15)}...
-              </h1>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
