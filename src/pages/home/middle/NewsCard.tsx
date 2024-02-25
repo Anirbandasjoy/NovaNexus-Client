@@ -1,4 +1,4 @@
-import { FaRegBookmark } from "react-icons/fa";
+// import { FaRegBookmark } from "react-icons/fa";
 import { BiComment, BiLike } from "react-icons/bi";
 import {
   AuthContextType,
@@ -20,11 +20,22 @@ import {
 import Comments from "@/pages/newsDetails/Comments";
 import React, { useContext } from "react";
 import { AuthContext } from "@/contex/AuthProvider";
+import { BsThreeDots } from "react-icons/bs";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { MdOutlineDeleteOutline } from "react-icons/md";
+import { LuBookmarkPlus } from "react-icons/lu";
+import useFetchNews from "@/hooks/news/useFetchNews";
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const { axiosInstance } = useAxios();
   const { refetch } = useFetchNewsBookmark();
+  const { refetch: newsRefetch } = useFetchNews();
   const navigate = useNavigate();
   const formatDate = (dateString: string | undefined) => {
     if (!dateString) return "";
@@ -43,15 +54,32 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
 
   const handleCreateBookmark = async (id?: string) => {
     try {
+      const toastId = toast.loading("Creating bookmark...");
       const { data } = await axiosInstance.post("/news-bookmark", {
         newsId: id,
       });
       console.log(data);
-      toast.success("Create a new Bookmark");
+      toast.success("Create a new Bookmark", {
+        id: toastId,
+      });
       refetch();
     } catch (error) {
-      // console.log(error.message);
+      console.log(error);
       toast.error("News already exists");
+    }
+  };
+
+  const handleDeleteNews = async (id?: string) => {
+    try {
+      const toastId = toast.loading("Deleting news...");
+      const { data } = await axiosInstance.delete(`/news/${id}`);
+      console.log(data);
+      newsRefetch();
+      toast.success("News deleted", {
+        id: toastId,
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
   const handleCommentNavigate = () => {
@@ -61,7 +89,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
     <div className="">
       <div className="bg-white  rounded-md pb-4 dark:border dark:border-gray-700 dark:bg-gray-800">
         <div className="p-4 space-y-3">
-          <div className="flex items-center  justify-between">
+          <div className="flex   justify-between">
             <Link
               to={`/profile/${news?.profileId?.email}`}
               className="flex gap-3"
@@ -90,9 +118,42 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                 </h2>
               </div>
             </Link>
-            <div onClick={() => handleCreateBookmark(news?._id)}>
+            {/* <div onClick={() => handleCreateBookmark(news?._id)}>
               <FaRegBookmark className="sm:text-2xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
-            </div>
+            </div> */}
+            {/* <div className="mr-2">
+              <BsThreeDots className="sm:text-3xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
+            </div> */}
+
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <div className="mr-2">
+                  <BsThreeDots className="sm:text-3xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <div
+                    className="flex gap-1 items-center cursor-pointer"
+                    onClick={() => handleCreateBookmark(news?._id)}
+                  >
+                    <LuBookmarkPlus />
+                    Bookmark
+                  </div>
+                </DropdownMenuItem>
+                {user?.email === news?.profileId?.email && (
+                  <DropdownMenuItem>
+                    <div
+                      className="flex gap-1 items-center cursor-pointer"
+                      onClick={() => handleDeleteNews(news?._id)}
+                    >
+                      <MdOutlineDeleteOutline className="text-[18px]" />
+                      Delete
+                    </div>
+                  </DropdownMenuItem>
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
           <div>
             <h1 className="text-sm font-semibold  text-gray-600 dark:text-gray-300">

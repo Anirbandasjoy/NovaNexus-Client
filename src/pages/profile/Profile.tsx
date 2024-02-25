@@ -123,7 +123,7 @@ const Profile = () => {
   return (
     <div className="flex gap-5 flex-col sm:flex-row">
       <div className="w-full ">
-        <div className="sm:mt-2 mt-4 relative gap-5 w-full  h-[32rem]">
+        <div className="sm:mt-2 mt-4 relative gap-5 w-full h-[19rem] lg:h-[28rem]">
           <div className="dark:bg-gray-700 bg-gray-100 h-full  w-full rounded-md">
             {singleUserInfo?.backgroundImage && (
               <div className="w-full  h-full rounded-md bg-auto">
@@ -135,9 +135,9 @@ const Profile = () => {
               </div>
             )}
           </div>
-          <div className="sm:w-6/12 w-9/12 bottom-5 rounded-xl lg:left-5 left-3 absolute   py-10   bg-white dark:bg-gray-800 h-[19rem] lg:w-[20rem]  shadow-sm flex justify-center ">
-            <div className="">
-              <div className="w-20 h-20 mx-auto ring-offset-2 ring-8 rounded-full ">
+          <div className="sm:w-6/12 w-[14rem]  rounded-full sm:rounded-full lg:left-5 left-3 lg:-bottom-20 -bottom-14 absolute   py-10   bg-white dark:bg-gray-800 lg:h-[17rem] h-[14rem]  lg:w-[17rem]  shadow-sm flex justify-center lg:ring-8 ring-4 ring-purple-400 ring-offset-4 ring-offset-slate-50 dark:ring-offset-slate-900 ">
+            <div className="lg:mt-2 mt-0">
+              <div className="lg:w-20  lg:h-20 w-14 h-14 mx-auto ring-offset-2 ring-4 rounded-full ">
                 {singleUserInfo?.profileImage ? (
                   <img
                     className="w-full  h-full rounded-full  bg-contain"
@@ -145,25 +145,25 @@ const Profile = () => {
                     alt=""
                   />
                 ) : (
-                  <div className="font-bold capitalize bg-blue-600 sm:h-fullsm:w-full h-full w-full rounded-full text-xl flex justify-center items-center text-white">
+                  <div className="font-bold capitalize bg-blue-600 sm:h-fullsm:w-full h-full w-full rounded-full lg:text-xl text-sm  flex justify-center items-center text-white">
                     {singleUserInfo && singleUserInfo?.fullName?.slice(0, 2)}
                   </div>
                 )}
               </div>
-              <div className="mt-6 space-y-2 text-center">
-                <h1 className="text-xl font-extrabold text-purple-400">
+              <div className="mt-3 text-center">
+                <h1 className="lg:text-xl text-lg font-extrabold text-purple-400">
                   {singleUserInfo?.fullName}
                 </h1>
-                <h2 className="font-bold text-[15px] text-[#736980]">
+                <h2 className="font-bold lg:text-[15px] text-sm text-[#736980]">
                   {singleUserInfo?.email}
                 </h2>
 
                 {/* Edit Button modal code start */}
-                <div>
+                <div className="mt-2">
                   <AlertDialog>
                     {user?.email === singleUserInfo?.email ? (
                       <AlertDialogTrigger>
-                        <button className="text-sm text-white font-bold rounded-sm textw bg-red-500 px-3 py-2">
+                        <button className="lg:text-sm text-xs text-white font-bold rounded-sm textw bg-red-500 px-3 py-2">
                           Edit Profile
                         </button>
                       </AlertDialogTrigger>

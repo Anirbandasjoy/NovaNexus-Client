@@ -1,17 +1,20 @@
-import { FaBookmark } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import useFetchNewsBookmark from "../../../hooks/newBookmark/useFetchNewsBookmark";
 import { NewsType } from "../../../helper/Type";
 import toast from "react-hot-toast";
 import { useAxios } from "../../../hooks/axios/useAxios";
+import { LuBookmarkPlus } from "react-icons/lu";
 const RightSide = () => {
   const { bookmarkNews, refetch } = useFetchNewsBookmark();
   const { axiosInstance } = useAxios();
   const handleDeleteBookmarkNews = async (id: string) => {
     try {
+      const toastId = toast.loading("Deleting bookmar...");
       const { data } = await axiosInstance.delete(`/news-bookmark/${id}`);
       console.log(data);
-      toast.success("Delete this News");
+      toast.success("Delete this News", {
+        id: toastId,
+      });
       console.log(id);
       refetch();
     } catch (error) {
@@ -22,7 +25,7 @@ const RightSide = () => {
   return (
     <div className=" dark:text-gray-300 hidden sm:block w-5/12 ">
       <div className="bg-gray-300 py-2 cursor-pointer flex justify-center gap-2 items-center dark:bg-gray-800  dark:border dark:border-gray-700 px-2  dark:text-gray-300 text-center text-gray-700  ">
-        <FaBookmark className="sm:text-xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
+        <LuBookmarkPlus className="sm:text-xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
         <h1 className="tex-lg sm:text-lg  font-bold ">All Bookmarks</h1>
       </div>
       <div className="mt-5 w-full sm:h-[calc(100vh-72px)] h-[calc(100vh-50px)] overflow-auto space-y-3">

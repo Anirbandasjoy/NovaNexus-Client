@@ -73,6 +73,7 @@ const Comments = ({
         commentText: inputStr,
       };
       console.log(commentBody);
+      const toastId = toast.loading("Uploading comment");
       const { data } = await axiosInstance.post(
         `/news-comments/${newsId}`,
         commentBody
@@ -81,18 +82,23 @@ const Comments = ({
       setInputStr("");
       setSelectedImage(null);
       refetch();
-      toast.success("Create a new comment");
+      toast.success("Create a new comment", {
+        id: toastId,
+      });
       // navigate(`/news-details/${payload?._id}`);
     }
   };
   const handleDeleteComment = async (id: string) => {
     try {
       console.log(id);
+      const toastId = toast.loading("Commet deleting...");
       const { data } = await axiosInstance.delete(
         `/news-comments/${id}?newsId=${newsId}`
       );
       console.log(data);
-      toast.success("Deleting this comment");
+      toast.success("Delete Comment ", {
+        id: toastId,
+      });
       refetch();
       // navigate(`/news-details/${payload?._id}`);
     } catch (error) {

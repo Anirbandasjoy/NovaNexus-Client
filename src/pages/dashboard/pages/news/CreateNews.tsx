@@ -22,6 +22,9 @@ import { uploadImage } from "@/api";
 import { AuthContext } from "@/contex/AuthProvider";
 import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
 import { useAxios } from "@/hooks/axios/useAxios";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import useFetchNews from "@/hooks/news/useFetchNews";
 // import { useState } from "react";
 
 const NewsSchema = yup.object({
@@ -34,8 +37,10 @@ const CreateNews = () => {
   const { axiosInstance } = useAxios();
   const { sigleUserProfile } = useGetSingleUserProfile(user?.email);
   const profileId = sigleUserProfile?.payload?._id;
+  const navigate = useNavigate();
   const { categories } = useFetchCategories();
   const category = categories?.payload;
+  const { refetch: allNewsRefetch } = useFetchNews();
   const {
     register,
     handleSubmit,
@@ -77,8 +82,14 @@ const CreateNews = () => {
       profileId: profileId,
     };
     try {
+      const toastId = toast.loading("Creating a new news...");
       const { data } = await axiosInstance.post("/news", uploadNewsInfo);
       console.log(data);
+      toast.success("News created", {
+        id: toastId,
+      });
+      allNewsRefetch();
+      navigate("/dashboard/all-news");
     } catch (error) {
       console.log(error);
     }
