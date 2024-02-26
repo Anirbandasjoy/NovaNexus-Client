@@ -1,5 +1,5 @@
 // import { FaRegBookmark } from "react-icons/fa";
-import { BiComment, BiLike } from "react-icons/bi";
+import { BiComment, BiEdit, BiLike } from "react-icons/bi";
 import {
   AuthContextType,
   DateTimeFormatOptions,
@@ -27,15 +27,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MdOutlineDeleteOutline } from "react-icons/md";
 import { LuBookmarkPlus } from "react-icons/lu";
 import useFetchNews from "@/hooks/news/useFetchNews";
 import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const { axiosInstance } = useAxios();
-  const { refetch } = useFetchNewsBookmark();
+  const { refetch: bookmarkRefetch } = useFetchNewsBookmark();
   const { refetch: newsRefetch } = useFetchNews();
   const { sigleUserProfile } = useGetSingleUserProfile(user?.email);
   const userId = sigleUserProfile?.payload?._id;
@@ -66,7 +66,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
       toast.success("Created a new Bookmark", {
         id: toastId,
       });
-      refetch();
+      bookmarkRefetch();
     } catch (error) {
       console.log(error);
       toast.dismiss();
@@ -147,15 +147,26 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                   </div>
                 </DropdownMenuItem>
                 {user?.email === news?.profileId?.email && (
-                  <DropdownMenuItem>
-                    <div
-                      className="flex gap-1 items-center cursor-pointer"
-                      onClick={() => handleDeleteNews(news?._id)}
-                    >
-                      <MdOutlineDeleteOutline className="text-[18px]" />
-                      Delete
-                    </div>
-                  </DropdownMenuItem>
+                  <>
+                    <DropdownMenuItem>
+                      <Link
+                        to={`/edit-post/${news?._id}`}
+                        className="flex gap-1 items-center cursor-pointer"
+                      >
+                        <BiEdit />
+                        Edit
+                      </Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      <div
+                        className="flex gap-1 items-center cursor-pointer"
+                        onClick={() => handleDeleteNews(news?._id)}
+                      >
+                        <RiDeleteBin6Line />
+                        Delete
+                      </div>
+                    </DropdownMenuItem>
+                  </>
                 )}
               </DropdownMenuContent>
             </DropdownMenu>

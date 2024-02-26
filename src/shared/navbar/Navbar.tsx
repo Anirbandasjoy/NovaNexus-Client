@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { AuthContextType } from "../../helper/Type";
 import { BiHomeAlt, BiSolidContact } from "react-icons/bi";
 import { RiAccountBoxLine } from "react-icons/ri";
-import { FaBlog } from "react-icons/fa";
+import { GoPlusCircle } from "react-icons/go";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -127,10 +127,10 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/blogs"
+                    to="/create-post"
                     className="block duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent hover:text-[#d72050] md:p-0  dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                   >
-                    <FaBlog className="text-2xl" />
+                    <GoPlusCircle className="text-2xl" />
                   </Link>
                 </li>
               </ul>

@@ -10,9 +10,10 @@ import Profile from "../pages/profile/Profile";
 import Dashboard from "../pages/dashboard/Dashboard";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Settings from "../pages/dashboard/pages/settings/Settings";
-import CreateNews from "../pages/dashboard/pages/news/CreateNews";
 import AllNews from "../pages/dashboard/pages/news/allNews/AllNews";
 import Users from "../pages/dashboard/pages/users/Users";
+import EditNews from "@/pages/home/middle/EditNews";
+import CreatePost from "@/pages/home/middle/CreatePost";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,22 @@ export const router = createBrowserRouter([
           </PribetRoutes>
         ),
       },
+      {
+        path: "edit-post/:id",
+        element: (
+          <PribetRoutes>
+            <EditNews />
+          </PribetRoutes>
+        ),
+      },
+      {
+        path: "create-post",
+        element: (
+          <PribetRoutes>
+            <CreatePost />
+          </PribetRoutes>
+        ),
+      },
     ],
   },
   {
@@ -63,10 +80,6 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         element: <Settings />,
-      },
-      {
-        path: "post-news",
-        element: <CreateNews />,
       },
       {
         path: "all-news",

@@ -1,5 +1,4 @@
 import { BsFillSendArrowDownFill } from "react-icons/bs";
-import Title from "../../../../helper/dasboardTitle/Title";
 import useFetchCategories from "../../../../hooks/category/useFetchCategories";
 import { AuthContextType, categoriesType } from "@/helper/Type";
 // import { categoriesType } from "../../../../helper/Type";
@@ -78,7 +77,7 @@ const CreateNews = () => {
       title: data?.title,
       details: data?.details,
       thumbnail_url: selectNewsImage,
-      category: selectedCategory,
+      category: selectedCategory || categories?.payload[0]?._id,
       profileId: profileId,
     };
     try {
@@ -89,19 +88,17 @@ const CreateNews = () => {
         id: toastId,
       });
       allNewsRefetch();
-      navigate("/dashboard/all-news");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <div>
-      <Title title="Post News" />
-
-      <div className=" max-w-2xl mx-auto mt-5 sm:mt-0">
+    <div className=" ">
+      <div className="max-w-3xl mx-auto ">
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex items-center flex-col sm:flex-row gap-5">
+          <div className="flex items-center flex-col  gap-4">
             <div className="flex flex-col gap-1 w-full">
               <input
                 {...register("title")}
@@ -117,7 +114,7 @@ const CreateNews = () => {
               className="flex flex-col gap-1 w-full "
               onChange={handleSelectChange}
             >
-              <Select required>
+              <Select>
                 <SelectTrigger className="focus:outline-none py-3 bg-[#ecf0f1] px-3  border-gray-300 border text-gray-400 dark:text-gray-400 dark:bg-gray-800  dark:border-gray-600   text-sm rounded-md">
                   <SelectValue
                     className="dark:text-gray-600 focus:outline-none"

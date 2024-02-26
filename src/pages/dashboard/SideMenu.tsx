@@ -3,7 +3,7 @@ import {
   MdOutlineSwapCalls,
 } from "react-icons/md";
 import Menu from "./Menu";
-import { AiOutlinePlusCircle, AiOutlineUsergroupAdd } from "react-icons/ai";
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
 import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -55,11 +55,6 @@ const SideMenu = () => {
               Icon={MdOutlineDashboardCustomize}
             />
 
-            <Menu
-              menuName="New News"
-              path="/dashboard/post-news"
-              Icon={AiOutlinePlusCircle}
-            />
             <Menu
               menuName="News"
               path="/dashboard/all-news"
