@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contex/AuthProvider";
 import { AuthContextType } from "../Type";
 import { LuBookmarkPlus } from "react-icons/lu";
+import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
 
 interface MenuItemComponentProps {
   children: ReactNode;
@@ -16,6 +17,7 @@ interface MenuItemComponentProps {
 const DropDown = ({ userName }: { userName: string | null | undefined }) => {
   //   const [activeMenuItem, setActiveMenuItem] = useState("");
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
+  const { sigleUserProfile } = useGetSingleUserProfile(user?.email);
 
   return (
     <div className="">
@@ -64,15 +66,17 @@ const DropDown = ({ userName }: { userName: string | null | undefined }) => {
                   </MenuItem>
                 </Menu.Item>
               </div>
-              <Menu.Item>
-                <MenuItem path="/dashboard">
-                  <MdOutlineDashboardCustomize
-                    className="mr-2 h-5 w-5 dark:text-white"
-                    aria-hidden="true"
-                  />
-                  Dashboard
-                </MenuItem>
-              </Menu.Item>
+              {sigleUserProfile?.payload?.role === "admin" && (
+                <Menu.Item>
+                  <MenuItem path="/dashboard">
+                    <MdOutlineDashboardCustomize
+                      className="mr-2 h-5 w-5 dark:text-white"
+                      aria-hidden="true"
+                    />
+                    Dashboard
+                  </MenuItem>
+                </Menu.Item>
+              )}
             </div>
           </Menu.Items>
         </Transition>

@@ -15,6 +15,7 @@ import Users from "../pages/dashboard/pages/users/Users";
 import EditNews from "@/pages/home/middle/EditNews";
 import CreatePost from "@/pages/home/middle/CreatePost";
 import BookmarkNews from "@/pages/home/middle/BookmarkNews";
+import AdminRoutes from "./AdminRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -73,8 +74,10 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <PribetRoutes>
-        {" "}
-        <DashboardLayout />
+        <AdminRoutes>
+          {" "}
+          <DashboardLayout />
+        </AdminRoutes>
       </PribetRoutes>
     ),
     children: [

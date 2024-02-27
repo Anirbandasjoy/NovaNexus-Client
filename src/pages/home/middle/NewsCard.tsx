@@ -94,7 +94,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
           <div className="flex   justify-between">
             <Link
               to={`/profile/${news?.profileId?.email}`}
-              className="flex gap-3"
+              className="flex gap-3 "
             >
               {news?.profileId?.profileImage === null ? (
                 <div>
@@ -111,20 +111,20 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                   />
                 </div>
               )}
-              <div>
+              <div className="relative">
                 <h1 className="font-semibold text-gray-600 dark:text-gray-300">
                   {news?.profileId?.fullName}
                 </h1>
                 <h2 className="text-xs text-gray-600 dark:text-gray-300">
                   {formatDate(news?.profileId?.createdAt)}
                 </h2>
+                {news?.status === "approved" && (
+                  <div className="flex gap-1 absolute -right-24 -top-1">
+                    <AiOutlineCheckCircle className="text-red-500 text-[14px]" />
+                    <h1 className="text-xs text-red-500">Verifed News</h1>
+                  </div>
+                )}
               </div>
-              {news?.status === "approved" && (
-                <div className="flex gap-1">
-                  <AiOutlineCheckCircle className="text-red-500 text-[14px]" />
-                  <h1 className="text-xs text-red-500">Verifed News</h1>
-                </div>
-              )}
             </Link>
             {/* <div onClick={() => handleCreateBookmark(news?._id)}>
               <FaRegBookmark className="sm:text-2xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
