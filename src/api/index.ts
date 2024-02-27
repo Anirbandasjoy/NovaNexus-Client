@@ -18,3 +18,5 @@ export const uploadImage = async (image: File) => {
 
   return data.data.display_url;
 };
+
+// news delete api

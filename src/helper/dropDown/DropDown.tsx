@@ -6,6 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contex/AuthProvider";
 import { AuthContextType } from "../Type";
+import { LuBookmarkPlus } from "react-icons/lu";
 
 interface MenuItemComponentProps {
   children: ReactNode;
@@ -52,6 +53,17 @@ const DropDown = ({ userName }: { userName: string | null | undefined }) => {
                   Profile
                 </MenuItem>
               </Menu.Item>
+              <div className="block sm:hidden">
+                <Menu.Item>
+                  <MenuItem path={"/bookmarks"}>
+                    <LuBookmarkPlus
+                      className="mr-2 h-5 w-5 dark:text-white"
+                      aria-hidden="true"
+                    />
+                    Bookmarks
+                  </MenuItem>
+                </Menu.Item>
+              </div>
               <Menu.Item>
                 <MenuItem path="/dashboard">
                   <MdOutlineDashboardCustomize

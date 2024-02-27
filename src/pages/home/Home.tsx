@@ -2,7 +2,7 @@ import { useState } from "react";
 import LeftSide from "./leftSide/LeftSide";
 import Middle from "./middle/Middle";
 import RightSide from "./rightSide/RightSide";
-import Bottombar from "@/shared/bottomBar/Bottombar";
+// import Bottombar from "@/shared/bottomBar/Bottombar";
 
 const Home = () => {
   const [categoryId, setCategoryId] = useState<string | undefined>(undefined);
@@ -14,9 +14,11 @@ const Home = () => {
       <div className="flex gap-8">
         <LeftSide getCategoryId={getCategoryId} />
         <Middle categoryId={categoryId} />
-        <RightSide />
+        <div className="hidden sm:block w-5/12 ">
+          <RightSide />
+        </div>
       </div>
-      <Bottombar />
+      {/* <Bottombar /> */}
     </div>
   );
 };

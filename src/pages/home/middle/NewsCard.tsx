@@ -1,5 +1,6 @@
 // import { FaRegBookmark } from "react-icons/fa";
 import { BiComment, BiEdit, BiLike } from "react-icons/bi";
+
 import {
   AuthContextType,
   DateTimeFormatOptions,
@@ -28,15 +29,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LuBookmarkPlus } from "react-icons/lu";
-import useFetchNews from "@/hooks/news/useFetchNews";
+// import useFetchNews from "@/hooks/news/useFetchNews";
 import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import useDeleteNews from "@/hooks/news/useDeleteNews";
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const { axiosInstance } = useAxios();
   const { refetch: bookmarkRefetch } = useFetchNewsBookmark();
-  const { refetch: newsRefetch } = useFetchNews();
+  // const { refetch: newsRefetch } = useFetchNews();
+  const { handleDeleteNews } = useDeleteNews();
   const { sigleUserProfile } = useGetSingleUserProfile(user?.email);
   const userId = sigleUserProfile?.payload?._id;
   const navigate = useNavigate();
@@ -74,22 +78,15 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
     }
   };
 
-  const handleDeleteNews = async (id?: string) => {
-    try {
-      const toastId = toast.loading("Deleting news...");
-      const { data } = await axiosInstance.delete(`/news/${id}`);
-      console.log(data);
-      newsRefetch();
-      toast.success("News deleted", {
-        id: toastId,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  const deleteNews = async (id?: string) => {
+    if (!id) return;
+    await handleDeleteNews(id);
   };
+
   const handleCommentNavigate = () => {
     navigate("/login");
   };
+
   return (
     <div className="">
       <div className="bg-white  rounded-md pb-4 dark:border dark:border-gray-700 dark:bg-gray-800">
@@ -122,6 +119,12 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                   {formatDate(news?.profileId?.createdAt)}
                 </h2>
               </div>
+              {news?.status === "approved" && (
+                <div className="flex gap-1">
+                  <AiOutlineCheckCircle className="text-red-500 text-[14px]" />
+                  <h1 className="text-xs text-red-500">Verifed News</h1>
+                </div>
+              )}
             </Link>
             {/* <div onClick={() => handleCreateBookmark(news?._id)}>
               <FaRegBookmark className="sm:text-2xl text-xl cursor-pointer text-gray-600 dark:text-gray-300" />
@@ -160,7 +163,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                     <DropdownMenuItem>
                       <div
                         className="flex gap-1 items-center cursor-pointer"
-                        onClick={() => handleDeleteNews(news?._id)}
+                        onClick={() => deleteNews(news?._id)}
                       >
                         <RiDeleteBin6Line />
                         Delete

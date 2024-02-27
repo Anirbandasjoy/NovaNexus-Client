@@ -14,6 +14,7 @@ import AllNews from "../pages/dashboard/pages/news/allNews/AllNews";
 import Users from "../pages/dashboard/pages/users/Users";
 import EditNews from "@/pages/home/middle/EditNews";
 import CreatePost from "@/pages/home/middle/CreatePost";
+import BookmarkNews from "@/pages/home/middle/BookmarkNews";
 
 export const router = createBrowserRouter([
   {
@@ -55,6 +56,14 @@ export const router = createBrowserRouter([
         element: (
           <PribetRoutes>
             <CreatePost />
+          </PribetRoutes>
+        ),
+      },
+      {
+        path: "bookmarks",
+        element: (
+          <PribetRoutes>
+            <BookmarkNews />
           </PribetRoutes>
         ),
       },
