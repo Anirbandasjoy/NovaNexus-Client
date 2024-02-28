@@ -66,7 +66,7 @@ const Middle = ({ categoryId }: { categoryId: string | undefined }) => {
       <div className="sm:hidden">
         <Categories handleCategoryIdSelected={handleCategoryIdSelected} />
       </div>
-      <div className="w-full sm:h-[calc(100vh-10px)] h-[calc(100vh-118px)] overflow-auto">
+      <div className="w-full sm:h-[calc(100vh-100px)] h-[calc(100vh-118px)] overflow-auto">
         <div className="space-y-4">
           {filteredNews.map((news: NewsType) => (
             <NewsCard key={news?._id} news={news} />

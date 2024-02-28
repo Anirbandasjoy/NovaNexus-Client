@@ -1,15 +1,14 @@
 import { RiLoginBoxLine } from "react-icons/ri";
 import { IoHome } from "react-icons/io5";
-import { FaBlog } from "react-icons/fa";
-
 import { BiSolidContact } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { LuBookmarkPlus } from "react-icons/lu";
 
 const Bottombar = () => {
   return (
     <div className="sm:hidden">
-      <div className="flex justify-around absolute dark:bg-gray-900 bottom-0 bg-gray-200 text-gray-500 w-full py-4 ">
+      <div className="flex justify-around absolute dark:bg-gray-800 bottom-0 bg-gray-300 text-gray-500 w-full py-4 items-center ">
         <div>
           <Link to="/">
             <IoHome className="text-2xl" />
@@ -22,13 +21,13 @@ const Bottombar = () => {
           </Link>
         </div>
         <div>
-          <Link to="/dashboard/post-news">
+          <Link to="/create-post">
             <AiFillPlusCircle className="text-3xl" />
           </Link>
         </div>
         <div>
-          <Link to="/blog">
-            <FaBlog className="text-2xl" />
+          <Link to="/bookmarks">
+            <LuBookmarkPlus className="text-[26px]" />
           </Link>
         </div>
 
