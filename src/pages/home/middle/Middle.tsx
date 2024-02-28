@@ -29,10 +29,10 @@ const Middle = ({ categoryId }: { categoryId: string | undefined }) => {
             )
           : allNewsData;
       setFilteredNews(filtered || []);
-      const filterData = allNewsData?.filter(
-        (newsData: NewsType) => newsData?.status !== "rejected"
-      );
-      setFilteredNews(filterData);
+      // const filterData = allNewsData?.filter(
+      //   (newsData: NewsType) => newsData?.status !== "rejected"
+      // );
+      // setFilteredNews(filterData);
     }
   }, [allNewsData, selectedCategoryId, categoryId]);
 

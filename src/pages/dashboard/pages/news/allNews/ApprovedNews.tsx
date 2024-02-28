@@ -88,13 +88,21 @@ const ApprovedNews = () => {
                     to={`/profile/${news?.profileId?.email}`}
                     className="flex items-center gap-2"
                   >
-                    <div className="w-8 h-8">
-                      <img
-                        className="w-full h-full rounded-full"
-                        src={news?.profileId?.profileImage}
-                        alt="ProfileImage"
-                      />
-                    </div>
+                    {news?.profileId?.profileImage === null ? (
+                      <div className="">
+                        <div className="font-bold capitalize bg-blue-600 h-8 w-8 rounded-full text-sm flex justify-center items-center text-white">
+                          {news?.profileId?.fullName?.slice(0, 2)}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="w-8 h-8">
+                        <img
+                          className="w-full h-full rounded-full"
+                          src={news?.profileId?.profileImage}
+                          alt="ProfileImage"
+                        />
+                      </div>
+                    )}
                     <div className="hover:underline">
                       {news?.profileId?.fullName}
                     </div>

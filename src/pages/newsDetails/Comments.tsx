@@ -12,6 +12,7 @@ import useFetchSignleNew from "../../hooks/news/useFetchSignleNew";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../contex/AuthProvider";
 import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
+import { Link } from "react-router-dom";
 // import { useNavigate } from "react-router-dom";
 const Comments = ({
   payload,
@@ -217,21 +218,23 @@ const Comments = ({
           {payload?.comments?.map((comment: CommentType) => {
             return (
               <div className="flex gap-4 w-full" key={comment?._id}>
-                {comment?.profileId?.profileImage === null ? (
-                  <div>
-                    <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
-                      {comment?.profileId?.fullName?.slice(0, 2)}
+                <Link to={`/profile/${comment?.profileId?.email}`}>
+                  {comment?.profileId?.profileImage === null ? (
+                    <div>
+                      <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+                        {comment?.profileId?.fullName?.slice(0, 2)}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="w-11 h-11 ">
-                    <img
-                      className="w-full h-full rounded-full cursor-pointer"
-                      src={comment?.profileId?.profileImage}
-                      alt="profile"
-                    />
-                  </div>
-                )}
+                  ) : (
+                    <div className="w-11 h-11 ">
+                      <img
+                        className="w-full h-full rounded-full cursor-pointer"
+                        src={comment?.profileId?.profileImage}
+                        alt="profile"
+                      />
+                    </div>
+                  )}
+                </Link>
 
                 <div className="w-8/12">
                   <div className="flex gap-2">

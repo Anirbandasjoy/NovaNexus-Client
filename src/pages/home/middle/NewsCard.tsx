@@ -34,6 +34,7 @@ import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile
 import { RiDeleteBin6Line } from "react-icons/ri";
 import useDeleteNews from "@/hooks/news/useDeleteNews";
 import { AiOutlineCheckCircle } from "react-icons/ai";
+import { FcApproval } from "react-icons/fc";
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
@@ -96,21 +97,26 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
               to={`/profile/${news?.profileId?.email}`}
               className="flex gap-3 "
             >
-              {news?.profileId?.profileImage === null ? (
-                <div>
-                  <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
-                    {news?.profileId?.fullName?.slice(0, 2)}
+              <div className="relative">
+                {news?.profileId?.profileImage === null ? (
+                  <div>
+                    <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+                      {news?.profileId?.fullName?.slice(0, 2)}
+                    </div>
                   </div>
-                </div>
-              ) : (
-                <div className="w-11">
-                  <img
-                    className="w-full h-full rounded-full cursor-pointer"
-                    src={news?.profileId?.profileImage}
-                    alt="profile"
-                  />
-                </div>
-              )}
+                ) : (
+                  <div className="w-11 h-11">
+                    <img
+                      className="w-full h-full rounded-full object-cover cursor-pointer"
+                      src={news?.profileId?.profileImage}
+                      alt="profile"
+                    />
+                  </div>
+                )}
+                {news?.profileId?.isVerified === "verified" && (
+                  <FcApproval className="text-[17px] absolute -bottom-1 right-[1px]" />
+                )}
+              </div>
               <div className="relative">
                 <h1 className="font-semibold text-gray-600 dark:text-gray-300">
                   {news?.profileId?.fullName}

@@ -2,12 +2,13 @@
 import { UserCredential } from "firebase/auth";
 
 // profile Type
-type ProfileType = {
+export type ProfileType = {
   email: string;
   profileImage: string;
   fullName: string;
   createdAt: string;
   role: string;
+  isVerified: string;
   _id: string;
 };
 // News Types
@@ -142,13 +143,4 @@ export type categoriesType = {
   slug: string;
 };
 
-// export function authUserToUser(authUser: AuthUser): User {
-//   return {
-//     uid: authUser.uid,
-//     email: authUser.email,
-//     emailVerified: authUser.emailVerified,
-//     displayName: authUser.displayName,
-//     photoURL: authUser.photoURL,
-//     // Add other properties if needed
-//   };
-// }
+// userType
