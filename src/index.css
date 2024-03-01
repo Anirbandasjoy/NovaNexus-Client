@@ -14,6 +14,10 @@ body {
   width: 0;
 }
 
+a.active {
+  color: #5d8aec;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -86,4 +90,3 @@ body {
     @apply bg-background text-foreground;
   }
 }
-

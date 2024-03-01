@@ -40,7 +40,7 @@ const NewsDetails = () => {
           to={`/profile/${payload?.profileId?.email}`}
           className="flex gap-3"
         >
-          {payload?.profileId.profileImage === null ? (
+          {payload?.profileId?.profileImage === null ? (
             <div>
               <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
                 {payload?.profileId?.fullName?.slice(0, 2)}

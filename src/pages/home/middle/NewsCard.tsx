@@ -36,6 +36,10 @@ import useDeleteNews from "@/hooks/news/useDeleteNews";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FcApproval } from "react-icons/fc";
 
+type Comment = {
+  _id: string;
+};
+
 const NewsCard = ({ news }: { news?: NewsType }) => {
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const { axiosInstance } = useAxios();
@@ -79,9 +83,9 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
     }
   };
 
-  const deleteNews = async (id?: string) => {
+  const deleteNews = async (id?: string, comments?: Comment[] | undefined) => {
     if (!id) return;
-    await handleDeleteNews(id);
+    await handleDeleteNews(id, comments);
   };
 
   const handleCommentNavigate = () => {
@@ -169,7 +173,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                     <DropdownMenuItem>
                       <div
                         className="flex gap-1 items-center cursor-pointer"
-                        onClick={() => deleteNews(news?._id)}
+                        onClick={() => deleteNews(news?._id, news?.comments)}
                       >
                         <RiDeleteBin6Line />
                         Delete
