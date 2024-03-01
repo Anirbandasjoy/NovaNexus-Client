@@ -135,7 +135,7 @@ const Profile = () => {
               </div>
             )}
           </div>
-          <div className="sm:w-6/12 w-[14rem]  rounded-full sm:rounded-full lg:left-5 left-3 lg:-bottom-20 -bottom-14 absolute   py-10   bg-white dark:bg-gray-800 lg:h-[17rem] h-[14rem]  lg:w-[17rem]  shadow-sm flex justify-center lg:ring-8 ring-4 ring-purple-400 ring-offset-4 ring-offset-slate-50 dark:ring-offset-slate-900 ">
+          <div className="sm:w-6/12 w-[14rem]  rounded-full sm:rounded-full lg:left-5 left-3 lg:-bottom-20 -bottom-14 absolute z-30   py-10   bg-white  dark:bg-gray-800 lg:h-[17rem] h-[14rem]  lg:w-[17rem]  shadow-sm flex justify-center lg:ring-8 ring-4 ring-purple-400 ring-offset-4 ring-offset-slate-50 dark:ring-offset-slate-900 ">
             <div className="lg:mt-2 mt-0">
               <div className="lg:w-20  lg:h-20 w-14 h-14 mx-auto ring-offset-2 ring-4 rounded-full ">
                 {singleUserInfo?.profileImage ? (
