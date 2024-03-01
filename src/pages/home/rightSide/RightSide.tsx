@@ -55,7 +55,7 @@ const RightSide = () => {
           </div>
         </div>
       ) : (
-        <div className="mt-5 w-full sm:h-[calc(100vh-72px)] h-[calc(100vh-50px)] overflow-auto space-y-3">
+        <div className="mt-5 w-full sm:h-[calc(100vh-145px)] h-[calc(100vh-50px)] overflow-auto space-y-3">
           {filterBookmarkData?.map((news: NewsType) => {
             return (
               <div
