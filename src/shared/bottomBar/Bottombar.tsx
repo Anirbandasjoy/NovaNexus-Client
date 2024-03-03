@@ -8,7 +8,7 @@ import { FaBlog } from "react-icons/fa";
 const Bottombar = () => {
   return (
     <div className="sm:hidden">
-      <div className="flex justify-around absolute dark:bg-gray-800 bottom-0 bg-white text-red-400 dark:text-red-300  border border-t-gray-200 dark:border-t-gray-700 shadow-2xl w-full py-3 items-center ">
+      <div className="flex justify-around absolute dark:bg-gray-800 bottom-0 bg-white  border border-t-gray-200 dark:border-t-gray-700 shadow-2xl w-full py-3 items-center ">
         <div>
           <NavLink to="/" className="flex flex-col items-center gap-1">
             <IoHome className="text-2xl" />
