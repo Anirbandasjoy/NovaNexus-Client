@@ -104,7 +104,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/"
-                    className="  duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex flex-col items-center justify-center"
+                    className="  duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:hover:text-[#e66f8f]   dark:text-gray-300 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700 flex flex-col items-center justify-center"
                   >
                     <BiHomeAlt className="text-2xl" />
                     <p className="text-[10px]">Home</p>
@@ -113,7 +113,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/about"
-                    className=" duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700  flex flex-col items-center"
+                    className=" duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:hover:text-[#e66f8f]  dark:text-gray-300 dark:hover:bg-gray-700 md:dark:hover:bg-transparent dark:border-gray-700  flex flex-col items-center"
                   >
                     <RiAccountBoxLine className="text-2xl" />
                     <p className="text-[10px]">About</p>
@@ -122,7 +122,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/carrer"
-                    className=" duration-300 font-bold py-2 px-3 text-gray-700 rounded h md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex flex-col items-center justify-center"
+                    className=" duration-300 font-bold py-2 px-3 text-gray-700 rounded h md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:text-gray-300 dark:hover:bg-gray-700  dark:hover:text-[#e66f8f] md:dark:hover:bg-transparent dark:border-gray-700 flex flex-col items-center justify-center"
                   >
                     <BiSolidContact className="text-2xl" />
                     <p className="text-[10px]">Contact</p>
@@ -131,7 +131,7 @@ const Navbar = () => {
                 <li>
                   <NavLink
                     to="/create-post"
-                    className=" duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent hover:text-[#d72050] md:p-0  dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 flex flex-col items-center justify-center"
+                    className=" duration-300 font-bold py-2 px-3 text-gray-700 rounded  md:hover:bg-transparent hover:text-[#d72050] md:p-0  dark:text-gray-300 dark:hover:bg-gray-700  dark:hover:text-[#e66f8f] md:dark:hover:bg-transparent dark:border-gray-700 flex flex-col items-center justify-center"
                   >
                     <GoPlusCircle className="text-2xl" />
                     <p className="text-[10px]">Post</p>

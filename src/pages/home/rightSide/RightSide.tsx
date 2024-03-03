@@ -58,28 +58,31 @@ const RightSide = () => {
         <div className="mt-5 w-full sm:h-[calc(100vh-145px)] h-[calc(100vh-50px)] overflow-auto space-y-3">
           {filterBookmarkData?.map((news: NewsType) => {
             return (
-              <div
+              <Link
+                to={`/news-details/${news?.newsId?._id}`}
                 key={news?._id}
-                className=" bg-gray-300  relative dark:bg-gray-800  dark:border dark:border-gray-700   dark:text-gray-300  flex text-center text-gray-700  font-bold  "
+                className=" bg-gray-300  relative dark:bg-gray-800  dark:border dark:border-gray-700   dark:text-gray-300  items-center flex text-center text-gray-700  font-bold  "
               >
-                <div className="w-14 h-14 cursor-pointer ">
+                <div className="w-16 h-14 cursor-pointer ">
                   <img
                     className="w-full h-full rounded-sm"
                     src={news?.newsId?.thumbnail_url}
                     alt="NewsImage"
                   />
                 </div>
-                <Link
-                  to={`/news-details/${news?.newsId?._id}`}
-                  className="py-2 text-left ml-4 hover:underline text-blue-600"
-                >
-                  {news?.newsId?.title?.slice(0, 15)}...
-                </Link>
+                <div className=" ">
+                  <h1 className=" text-left ml-4 hover:underline text-blue-600">
+                    {news?.newsId?.title?.slice(0, 15)}
+                  </h1>
+                  <h2 className="font-normal  ml-4 text-left text-[8px]">
+                    {news?.newsId?.details?.slice(0, 35)}...
+                  </h2>
+                </div>
                 <IoMdClose
-                  className="text-xl bg-white cursor-pointer text-gray-600 rounded-sm p-[1px] absolute top-0 right-0"
+                  className="text-xl bg-white cursor-pointer dark:bg-gray-900 dark:text-white dark:border dark:border-gray-500 text-gray-600 rounded-sm p-[1px] absolute top-0 right-0"
                   onClick={() => handleDeleteBookmarkNews(news?._id)}
                 />
-              </div>
+              </Link>
             );
           })}
         </div>
