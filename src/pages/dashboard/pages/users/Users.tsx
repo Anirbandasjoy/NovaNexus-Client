@@ -23,6 +23,7 @@ import { ProfileType } from "@/helper/Type";
 import toast from "react-hot-toast";
 import { useAxios } from "@/hooks/axios/useAxios";
 import useFetchNews from "@/hooks/news/useFetchNews";
+
 const Users = () => {
   const { users, refetch: usersRefetch } = useGetAllUsersProfile();
   const { refetch: allNewsRefetch } = useFetchNews();
@@ -52,16 +53,19 @@ const Users = () => {
 
   const handleDeleteUser = async (id?: string | undefined) => {
     try {
-      // const toastId = toast.loading("Deleting...");
+      const toastId = toast.loading("Deleting...");
       const { data } = await axiosInstance.delete(`/profile/${id}`);
       console.log(data);
-      toast.success("Deleted user");
+      toast.success("Deleted user", {
+        id: toastId,
+      });
       usersRefetch();
       allNewsRefetch();
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <div>
       <Title title="All Users" />

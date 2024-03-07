@@ -58,8 +58,7 @@ const RightSide = () => {
         <div className="mt-5 w-full sm:h-[calc(100vh-145px)] h-[calc(100vh-50px)] overflow-auto space-y-3">
           {filterBookmarkData?.map((news: NewsType) => {
             return (
-              <Link
-                to={`/news-details/${news?.newsId?._id}`}
+              <div
                 key={news?._id}
                 className=" bg-gray-300  relative dark:bg-gray-800  dark:border dark:border-gray-700   dark:text-gray-300  items-center flex text-center text-gray-700  font-bold  "
               >
@@ -70,19 +69,19 @@ const RightSide = () => {
                     alt="NewsImage"
                   />
                 </div>
-                <div className=" ">
+                <Link to={`/news-details/${news?.newsId?._id}`} className=" ">
                   <h1 className=" text-left ml-4 hover:underline text-blue-600">
                     {news?.newsId?.title?.slice(0, 15)}
                   </h1>
                   <h2 className="font-normal  ml-4 text-left text-[8px]">
                     {news?.newsId?.details?.slice(0, 35)}...
                   </h2>
-                </div>
+                </Link>
                 <IoMdClose
                   className="text-xl bg-white cursor-pointer dark:bg-gray-900 dark:text-white dark:border dark:border-gray-500 text-gray-600 rounded-sm p-[1px] absolute top-0 right-0"
                   onClick={() => handleDeleteBookmarkNews(news?._id)}
                 />
-              </Link>
+              </div>
             );
           })}
         </div>

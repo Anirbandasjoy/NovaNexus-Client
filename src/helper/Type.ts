@@ -143,4 +143,10 @@ export type categoriesType = {
   slug: string;
 };
 
-// userType
+// reactType
+
+export type ReactType = {
+  profileId: string;
+  newsId: string;
+  react: string;
+};

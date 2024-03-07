@@ -5,6 +5,7 @@ import {
   AuthContextType,
   DateTimeFormatOptions,
   NewsType,
+  ReactType,
 } from "../../../helper/Type";
 import { Link, useNavigate } from "react-router-dom";
 import { useAxios } from "../../../hooks/axios/useAxios";
@@ -35,6 +36,7 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import useDeleteNews from "@/hooks/news/useDeleteNews";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FcApproval } from "react-icons/fc";
+import useFetchAllReacts from "@/hooks/react/useFetchAllReacts";
 
 type Comment = {
   _id: string;
@@ -49,6 +51,8 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
   const { sigleUserProfile } = useGetSingleUserProfile(user?.email);
   const userId = sigleUserProfile?.payload?._id;
   const navigate = useNavigate();
+  const { reacts, refetch: reactRefetch } = useFetchAllReacts();
+
   const formatDate = (dateString: string | undefined) => {
     if (!dateString) return "";
 
@@ -90,6 +94,22 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
 
   const handleCommentNavigate = () => {
     navigate("/login");
+  };
+
+  const handleCreateReact = async (newsId: string | undefined) => {
+    if (!newsId) return;
+    const react = "like";
+    try {
+      const { data } = await axiosInstance.post("/react", {
+        newsId,
+        profileId: userId,
+        react,
+      });
+      console.log(data);
+      reactRefetch();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -215,12 +235,28 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
         </div>
         <div className="mt-8 sm:px-4 w-full h-[1px] bg-gray-200 dark:bg-gray-700"></div>
         <div className="sm:px-4 mt-2 flex gap-6 sm:gap-0 items-center ">
-          <div className="flex items-center gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200">
-            <BiLike className="text-[21px] text-gray-500 dark:text-gray-300" />
-            <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">
-              Like
-            </p>
-          </div>
+          {reacts?.payload?.find(
+            (react: ReactType) =>
+              react?.newsId === news?._id && react?.profileId === userId
+          ) ? (
+            <div className="flex items-center gap-1 cursor-pointer w-full hover:bg-gray-100  dark:hover:bg-gray-700 py-1 justify-center  rounded-sm text duration-200">
+              <BiLike className="text-[21px] text-green-500 dark:text-green-500" />
+              <p className="text-[17px] font-bold text-green-500 dark:text-green-500">
+                Like
+              </p>
+            </div>
+          ) : (
+            <div
+              className="flex items-center gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200"
+              onClick={() => handleCreateReact(news?._id)}
+            >
+              <BiLike className="text-[21px] text-gray-500 dark:text-gray-300" />
+              <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">
+                Like
+              </p>
+            </div>
+          )}
+
           {/* <div className="flex items-center gap-1 cursor-pointer w-full hover:bg-gray-100 dark:hover:bg-gray-700 py-1 justify-center rounded-sm duration-200">
             <BiComment className="text-[21px] text-gray-500 dark:text-gray-300" />
             <p className="text-[17px] font-bold text-gray-500 dark:text-gray-300">
