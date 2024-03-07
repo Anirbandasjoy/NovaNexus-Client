@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/drawer";
 
 import Comments from "@/pages/newsDetails/Comments";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contex/AuthProvider";
 import { BsThreeDots } from "react-icons/bs";
 import {
@@ -37,12 +37,15 @@ import useDeleteNews from "@/hooks/news/useDeleteNews";
 import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FcApproval } from "react-icons/fc";
 import useFetchAllReacts from "@/hooks/react/useFetchAllReacts";
+import likeSound from "../../../assets/audio/like.mp3";
 
 type Comment = {
   _id: string;
 };
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
+  const [playLikeSound, setPlayLikeSound] = useState(false);
+
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const { axiosInstance } = useAxios();
   const { refetch: bookmarkRefetch } = useFetchNewsBookmark();
@@ -96,6 +99,17 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
     navigate("/login");
   };
 
+  useEffect(() => {
+    if (playLikeSound) {
+      const audio = new Audio(likeSound);
+      audio.play();
+      // Reset playLikeSound state after the sound finishes playing
+      audio.onended = () => {
+        setPlayLikeSound(false);
+      };
+    }
+  }, [playLikeSound]);
+
   const handleCreateReact = async (newsId: string | undefined) => {
     if (!newsId) return;
     const react = "like";
@@ -107,6 +121,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
       });
       console.log(data);
       reactRefetch();
+      setPlayLikeSound(true);
     } catch (error) {
       console.log(error);
     }
