@@ -300,7 +300,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                               to={`/profile/${react?.profileId?.email}`}
                               className=""
                             >
-                              {news?.profileId?.profileImage === null ? (
+                              {react?.profileId?.profileImage === null ? (
                                 <div>
                                   <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
                                     {news?.profileId?.fullName?.slice(0, 2)}
@@ -310,7 +310,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                                 <div className="w-11 h-11">
                                   <img
                                     className="w-full h-full rounded-full object-cover cursor-pointer"
-                                    src={news?.profileId?.profileImage}
+                                    src={react?.profileId?.profileImage}
                                     alt="profile"
                                   />
                                 </div>
