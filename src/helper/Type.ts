@@ -146,7 +146,7 @@ export type categoriesType = {
 // reactType
 
 export type ReactType = {
-  profileId: string;
+  profileId: ProfileType;
   newsId: string;
   react: string;
 };

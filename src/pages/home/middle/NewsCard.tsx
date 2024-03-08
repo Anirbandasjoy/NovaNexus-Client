@@ -6,6 +6,14 @@ import {
   BiShare,
   BiSolidLike,
 } from "react-icons/bi";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import {
   AuthContextType,
@@ -268,12 +276,61 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
           <div className="flex justify-between px-8">
             <div className="flex gap-1 items-center">
               <BiSolidLike className="text-green-400" />
-              <p className="text-xs text-gray-600">
-                {singleNewsReacts?.payload?.length}
-                <span className="cursor-pointer hover:underline ml-[2px]">
-                  others
-                </span>
-              </p>
+
+              <Dialog>
+                <DialogTrigger>
+                  <p className="text-xs text-gray-600">
+                    {singleNewsReacts?.payload?.length}
+                    <span className="cursor-pointer hover:underline ml-[2px]">
+                      others
+                    </span>
+                  </p>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>
+                      <h1 className="text-green-500 font-bold">ALL</h1>
+                    </DialogTitle>
+                    <div className="w-full h-[1px] bg-gray-500"></div>
+                    <DialogDescription>
+                      <div className="min-h-64 mt-2 space-y-4">
+                        {singleNewsReacts?.payload?.map((react: ReactType) => (
+                          <div className="flex gap-2 items-center">
+                            <Link
+                              to={`/profile/${react?.profileId?.email}`}
+                              className=""
+                            >
+                              {news?.profileId?.profileImage === null ? (
+                                <div>
+                                  <div className="font-bold capitalize bg-blue-600 h-10 w-10 rounded-full text-sm flex justify-center items-center text-white">
+                                    {news?.profileId?.fullName?.slice(0, 2)}
+                                  </div>
+                                </div>
+                              ) : (
+                                <div className="w-11 h-11">
+                                  <img
+                                    className="w-full h-full rounded-full object-cover cursor-pointer"
+                                    src={news?.profileId?.profileImage}
+                                    alt="profile"
+                                  />
+                                </div>
+                              )}
+                            </Link>
+                            <div>
+                              <Link
+                                to={`/profile/${react?.profileId?.email}`}
+                                className="hover:underline cursor-pointer text-[15px] font-bold"
+                              >
+                                {react?.profileId?.fullName}
+                              </Link>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
             </div>
             <div className="flex gap-1  items-center">
               <BiComment className="text-green-400" />
