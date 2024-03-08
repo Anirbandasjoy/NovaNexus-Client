@@ -1,5 +1,11 @@
 // import { FaRegBookmark } from "react-icons/fa";
-import { BiComment, BiEdit, BiLike } from "react-icons/bi";
+import {
+  BiComment,
+  BiEdit,
+  BiLike,
+  BiShare,
+  BiSolidLike,
+} from "react-icons/bi";
 
 import {
   AuthContextType,
@@ -38,6 +44,7 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { FcApproval } from "react-icons/fc";
 import useFetchAllReacts from "@/hooks/react/useFetchAllReacts";
 import likeSound from "../../../assets/audio/like.mp3";
+import useGetSingleNewsReact from "@/hooks/react/useGetSingleNewsReact";
 
 type Comment = {
   _id: string;
@@ -45,16 +52,18 @@ type Comment = {
 
 const NewsCard = ({ news }: { news?: NewsType }) => {
   const [playLikeSound, setPlayLikeSound] = useState(false);
-
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const { axiosInstance } = useAxios();
   const { refetch: bookmarkRefetch } = useFetchNewsBookmark();
-  // const { refetch: newsRefetch } = useFetchNews();
   const { handleDeleteNews } = useDeleteNews();
   const { sigleUserProfile } = useGetSingleUserProfile(user?.email);
   const userId = sigleUserProfile?.payload?._id;
   const navigate = useNavigate();
   const { reacts, refetch: reactRefetch } = useFetchAllReacts();
+  const [newsId, setNewsId] = useState<string | undefined | null>(null);
+  const { singleNewsReacts, refetch: singleNewsReactRefetch } =
+    useGetSingleNewsReact(newsId);
+  console.log(singleNewsReacts);
 
   const formatDate = (dateString: string | undefined) => {
     if (!dateString) return "";
@@ -103,7 +112,6 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
     if (playLikeSound) {
       const audio = new Audio(likeSound);
       audio.play();
-      // Reset playLikeSound state after the sound finishes playing
       audio.onended = () => {
         setPlayLikeSound(false);
       };
@@ -120,12 +128,22 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
         react,
       });
       console.log(data);
+      singleNewsReactRefetch();
       reactRefetch();
       setPlayLikeSound(true);
     } catch (error) {
       console.log(error);
     }
   };
+
+  const handleSingleNewsReact = async (id: string | undefined | null) => {
+    setNewsId(id);
+  };
+
+  useEffect(() => {
+    handleSingleNewsReact(news?._id);
+  }, [news?._id]);
+  console.log(singleNewsReacts);
 
   return (
     <div className="">
@@ -222,8 +240,6 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
           <div>
             <h1 className="text-sm font-semibold  text-gray-600 dark:text-gray-300">
               {news?.title}
-              {/* Biden Pledges Nearly $3 Billion To Ukraine In Largest U.S.
-              Military Aid Package Yet */}
             </h1>
           </div>
         </div>
@@ -248,14 +264,40 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
             </Link>
           </p>
         </div>
-        <div className="mt-8 sm:px-4 w-full h-[1px] bg-gray-200 dark:bg-gray-700"></div>
+        <div className="mt-8 mb-2">
+          <div className="flex justify-between px-8">
+            <div className="flex gap-1 items-center">
+              <BiSolidLike className="text-green-400" />
+              <p className="text-xs text-gray-600">
+                {singleNewsReacts?.payload?.length}
+                <span className="cursor-pointer hover:underline ml-[2px]">
+                  others
+                </span>
+              </p>
+            </div>
+            <div className="flex gap-1  items-center">
+              <BiComment className="text-green-400" />
+              <p className="text-xs text-gray-600 cursor-pointer">
+                {news?.comments?.length}
+                <span className="cursor-pointer hover:underline ml-[2px]">
+                  others
+                </span>
+              </p>
+            </div>
+            <div className="flex gap-1 items-center cursor-pointer">
+              <BiShare className="text-green-400" />
+              <p className="text-xs text-gray-600">12</p>
+            </div>
+          </div>
+        </div>
+        <div className=" sm:px-4 w-11/12 mx-auto h-[1px] bg-gray-200 dark:bg-gray-700"></div>
         <div className="sm:px-4 mt-2 flex gap-6 sm:gap-0 items-center ">
           {reacts?.payload?.find(
             (react: ReactType) =>
               react?.newsId === news?._id && react?.profileId === userId
           ) ? (
             <div className="flex items-center gap-1 cursor-pointer w-full hover:bg-gray-100  dark:hover:bg-gray-700 py-1 justify-center  rounded-sm text duration-200">
-              <BiLike className="text-[21px] text-green-500 dark:text-green-500" />
+              <BiSolidLike className="text-[21px] text-green-500 dark:text-green-500" />
               <p className="text-[17px] font-bold text-green-500 dark:text-green-500">
                 Like
               </p>
@@ -322,6 +364,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
             }
           />
         </div>
+        <div className=" sm:px-4 w-11/12 mx-auto h-[1px] mt-2  bg-gray-200 dark:bg-gray-700"></div>
       </div>
     </div>
   );

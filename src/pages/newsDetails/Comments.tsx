@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { AuthContext } from "../../contex/AuthProvider";
 import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
 import { Link } from "react-router-dom";
+import useFetchNews from "@/hooks/news/useFetchNews";
 // import { useNavigate } from "react-router-dom";
 const Comments = ({
   payload,
@@ -31,6 +32,7 @@ const Comments = ({
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showPicker, setShowPicker] = useState(false);
   const [commetImageUploadLoading, setCommentImageUpLoading] = useState(false);
+  const { refetch: allNewsRefetch } = useFetchNews();
   const onEmojiClick = (emojiObject: { emoji: string }): void => {
     setInputStr((prevInput) => prevInput + emojiObject.emoji);
     setShowPicker(false);
@@ -83,6 +85,7 @@ const Comments = ({
       setInputStr("");
       setSelectedImage(null);
       refetch();
+      allNewsRefetch();
       toast.success("Create a new comment", {
         id: toastId,
       });
@@ -101,6 +104,7 @@ const Comments = ({
         id: toastId,
       });
       refetch();
+      allNewsRefetch();
       // navigate(`/news-details/${payload?._id}`);
     } catch (error) {
       console.error("Error deleting comment:", error);
