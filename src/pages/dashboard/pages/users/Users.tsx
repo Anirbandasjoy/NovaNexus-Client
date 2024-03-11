@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Table,
   TableBody,
@@ -41,7 +42,8 @@ const Users = () => {
 
   const handleVerifyUserProfile = async (
     email: string | undefined,
-    isVerified?: string | undefined
+    isVerified?: string | undefined,
+    msg?: any
   ) => {
     if (!email) return;
     try {
@@ -51,7 +53,7 @@ const Users = () => {
         { isVerified }
       );
       console.log(data);
-      toast.success("Verified", {
+      toast.success(msg, {
         id: toastId,
       });
       usersRefetch();
@@ -146,28 +148,40 @@ const Users = () => {
                         <BsThreeDots />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
-                        <DropdownMenuItem>
-                          <div
-                            className="flex gap-1 items-center cursor-pointer"
-                            onClick={() =>
-                              handleVerifyUserProfile(user?.email, "verified")
-                            }
-                          >
-                            <FcOk className="text-lg" />
-                            Verified
-                          </div>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                          <div
-                            className="flex gap-1 items-center cursor-pointer"
-                            onClick={() =>
-                              handleVerifyUserProfile(user?.email, "normal")
-                            }
-                          >
-                            <FcHighPriority className="text-lg" />
-                            Cencel Verified
-                          </div>
-                        </DropdownMenuItem>
+                        {user?.isVerified === "normal" ? (
+                          <DropdownMenuItem>
+                            <div
+                              className="flex gap-1 items-center cursor-pointer"
+                              onClick={() =>
+                                handleVerifyUserProfile(
+                                  user?.email,
+                                  "verified",
+                                  "Verified"
+                                )
+                              }
+                            >
+                              <FcOk className="text-lg" />
+                              Verified
+                            </div>
+                          </DropdownMenuItem>
+                        ) : (
+                          <DropdownMenuItem>
+                            <div
+                              className="flex gap-1 items-center cursor-pointer"
+                              onClick={() =>
+                                handleVerifyUserProfile(
+                                  user?.email,
+                                  "normal",
+                                  "Cencel verification"
+                                )
+                              }
+                            >
+                              <FcHighPriority className="text-lg" />
+                              Cencel Verified
+                            </div>
+                          </DropdownMenuItem>
+                        )}
+
                         <DropdownMenuItem>
                           <div
                             className="flex gap-1 items-center cursor-pointer"
