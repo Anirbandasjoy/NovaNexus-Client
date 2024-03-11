@@ -10,6 +10,7 @@ const Menu = ({ menuName, path, Icon }: MenuProps) => {
   return (
     <NavLink
       to={path}
+      end
       className={({ isActive }) => `
         flex items-center gap-3 hover:bg-gray-300 dark:hover:bg-gray-800 py-2 pl-3 cursor-pointer
         ${

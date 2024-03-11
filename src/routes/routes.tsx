@@ -7,7 +7,6 @@ import Register from "../pages/auth/Register";
 import Login from "../pages/auth/Login";
 import PribetRoutes from "./PribetRoutes";
 import Profile from "../pages/profile/Profile";
-import Dashboard from "../pages/dashboard/Dashboard";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Settings from "../pages/dashboard/pages/settings/Settings";
 import AllNews from "../pages/dashboard/pages/news/allNews/AllNews";
@@ -16,6 +15,7 @@ import EditNews from "@/pages/home/middle/EditNews";
 import CreatePost from "@/pages/home/middle/CreatePost";
 import BookmarkNews from "@/pages/home/middle/BookmarkNews";
 import AdminRoutes from "./AdminRoutes";
+import Dashboard from "@/pages/dashboard/dashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -82,7 +82,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "dashboard",
+        index: true,
         element: (
           <PribetRoutes>
             <Dashboard />
