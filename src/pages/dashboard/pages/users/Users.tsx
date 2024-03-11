@@ -12,6 +12,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 import useGetAllUsersProfile from "@/hooks/userProfile/useGetAllUsersProfile";
 import Title from "../../../../helper/dasboardTitle/Title";
@@ -27,7 +36,7 @@ import useFetchNews from "@/hooks/news/useFetchNews";
 const Users = () => {
   const { users, refetch: usersRefetch } = useGetAllUsersProfile();
   const { refetch: allNewsRefetch } = useFetchNews();
-  const allUsers = users?.payload;
+  const allUsers = users?.payload?.userProfiles;
   const { axiosInstance } = useAxios();
 
   const handleVerifyUserProfile = async (
@@ -176,6 +185,24 @@ const Users = () => {
             })}
           </TableBody>
         </Table>
+      </div>
+      <div>
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink>1</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
     </div>
   );

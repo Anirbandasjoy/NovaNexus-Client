@@ -10,7 +10,7 @@ const useGetAllUsersProfile = () => {
   } = useQuery({
     queryKey: ["usersProfile"],
     queryFn: async () => {
-      const { data } = await axiosInstance.get("/profile");
+      const { data } = await axiosInstance.get(`/profile?limit=4&page=1`);
       return data;
     },
   });
