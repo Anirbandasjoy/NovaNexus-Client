@@ -164,23 +164,25 @@ const CreateNews = () => {
               ""
             )}
           </div>
-          {imageUploadLoading ? (
-            <button
-              disabled
-              className="py-2 px-3 cursor-not-allowed w-full rounded-md bg-[#1abc9c] text-white  flex items-center justify-center gap-1 "
-            >
-              <span className="font-bold">Save to Submit</span>
-              <BsFillSendArrowDownFill />
-            </button>
-          ) : (
-            <button
-              type="submit"
-              className="py-2 px-3 w-full rounded-md bg-[#1abc9c] text-white  flex items-center justify-center gap-1 cursor-pointer"
-            >
-              <span className="font-bold">Save to Submit</span>
-              <BsFillSendArrowDownFill />
-            </button>
-          )}
+          <div className="w-[20%] ">
+            {imageUploadLoading ? (
+              <button
+                disabled
+                className="py-2 px-2 cursor-not-allowed w-full rounded-md bg-[#1abc9c] text-white  flex items-center justify-center gap-1 "
+              >
+                <span className="font-bold">Post</span>
+                <BsFillSendArrowDownFill />
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="py-2 px-2 w-full rounded-md bg-[#1abc9c] text-white  flex items-center justify-center gap-1 cursor-pointer"
+              >
+                <span className="font-bold">Post</span>
+                <BsFillSendArrowDownFill />
+              </button>
+            )}
+          </div>
         </form>
       </div>
     </div>

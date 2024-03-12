@@ -33,6 +33,10 @@ import { ProfileType } from "@/helper/Type";
 import toast from "react-hot-toast";
 import { useAxios } from "@/hooks/axios/useAxios";
 import useFetchNews from "@/hooks/news/useFetchNews";
+import { Input } from "@/components/ui/input";
+import { FaSearch } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
 
 const Users = () => {
   const { users, refetch: usersRefetch } = useGetAllUsersProfile();
@@ -77,9 +81,31 @@ const Users = () => {
     }
   };
 
+  const { handleSubmit, register } = useForm();
+
+  const onSubmit = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <div>
-      <Title title="All Users" />
+      <div className="flex sm:items-center flex-col gap-4 sm:gap-0 sm:flex-row sm:justify-between flex-wrap">
+        <Title title="All Users" />
+        <form
+          className="flex items-center   gap-2"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div>
+            <div className="relative">
+              <Input placeholder="Search user" {...register("searchText")} />
+              <FaSearch className="absolute top-3 right-4 text-gray-400" />
+            </div>
+          </div>
+          <div>
+            <Button className="text-xs">Search</Button>
+          </div>
+        </form>
+      </div>
       <div className="sm:h-[calc(100vh-120px)] h-[calc(100vh-170px)] mt-4 overflow-auto ">
         {/* <h1 className="my-2 text-sm">Pending News</h1> */}
         <Table className="z-10 ">

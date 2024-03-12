@@ -30,9 +30,13 @@ const Profile = () => {
   const { user } = useContext(AuthContext as React.Context<AuthContextType>);
   const { axiosInstance } = useAxios();
   const { email } = useParams();
-  const { newsData } = useFetchNews();
+  const { newsData, isLoading: newsLoading } = useFetchNews();
   const navigate = useNavigate();
-  const { sigleUserProfile, refetch } = useGetSingleUserProfile(email);
+  const {
+    sigleUserProfile,
+    refetch,
+    isLoading: userProfileLoading,
+  } = useGetSingleUserProfile(email);
   const singleUserInfo = sigleUserProfile?.payload;
   const [profilePic, setProfilePic] = useState<string | null | undefined>(
     user?.photoURL
@@ -120,6 +124,27 @@ const Profile = () => {
     setFilteredNews(filterData);
   }, [email, newsData?.payload]);
 
+  if (newsLoading || userProfileLoading) {
+    return (
+      <div className="flex justify-center items-center h-[calc(100vh-100px)]">
+        <div className="border border-blue-300 shadow rounded-md p-4 max-w-sm w-full mx-auto">
+          <div className="animate-pulse flex space-x-4">
+            <div className="rounded-full bg-slate-700 h-10 w-10"></div>
+            <div className="flex-1 space-y-6 py-1">
+              <div className="h-2 bg-slate-700 rounded"></div>
+              <div className="space-y-3">
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="h-2 bg-slate-700 rounded col-span-2"></div>
+                  <div className="h-2 bg-slate-700 rounded col-span-1"></div>
+                </div>
+                <div className="h-2 bg-slate-700 rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="flex gap-5 flex-col sm:flex-row">
       <div className="w-full ">
