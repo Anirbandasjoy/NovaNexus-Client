@@ -34,12 +34,18 @@ import toast from "react-hot-toast";
 import { useAxios } from "@/hooks/axios/useAxios";
 import useFetchNews from "@/hooks/news/useFetchNews";
 import { Input } from "@/components/ui/input";
-import { FaSearch } from "react-icons/fa";
+import { FaExclamationCircle, FaSearch } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
-
+import { useState } from "react";
+import UserShowLoading from "../../../../helper/Loading/UserShowLoading";
 const Users = () => {
-  const { users, refetch: usersRefetch } = useGetAllUsersProfile();
+  const [searchText, setSearchText] = useState<null | string | undefined>("");
+  const {
+    users,
+    isLoading: userLoading,
+    refetch: usersRefetch,
+  } = useGetAllUsersProfile(searchText);
   const { refetch: allNewsRefetch } = useFetchNews();
   const allUsers = users?.payload?.userProfiles;
   const { axiosInstance } = useAxios();
@@ -84,8 +90,11 @@ const Users = () => {
   const { handleSubmit, register } = useForm();
 
   const onSubmit = (data: any) => {
-    console.log(data);
+    setSearchText(data?.searchText);
   };
+
+  console.log(userLoading);
+  console.log(searchText);
 
   return (
     <div>
@@ -106,126 +115,155 @@ const Users = () => {
           </div>
         </form>
       </div>
-      <div className="sm:h-[calc(100vh-120px)] h-[calc(100vh-170px)] mt-4 overflow-auto ">
-        {/* <h1 className="my-2 text-sm">Pending News</h1> */}
-        <Table className="z-10 ">
-          {/* <TableCaption>A list of your Pending News.</TableCaption> */}
-          <TableHeader className="bg-white dark:bg-gray-800">
-            <TableRow>
-              <TableHead>Verification</TableHead>
-              <TableHead>Author</TableHead>
-              <TableHead className="text-center">Action</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody className="">
-            {allUsers?.map((user: ProfileType) => {
-              return (
-                <TableRow key={user?._id}>
-                  {/* <TableCell className="">
-                  <img
-                    className="w-10 h-8 "
-                    src={news?.thumbnail_url}
-                    alt={news?.title}
-                  />
-                </TableCell> */}
-                  <TableCell>
-                    {user?.isVerified === "verified" ? (
-                      <div className="flex items-center gap-2">
-                        <FcApproval className="text-lg" />
-                        Verified
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-2">
-                        <FcCancel className="text-lg" />
-                        Not Verified
-                      </div>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    <Link
-                      to={`/profile/${user?.email}`}
-                      className="flex items-center gap-2"
-                    >
-                      {user?.profileImage === null ? (
-                        <div className="">
-                          <div className="font-bold capitalize bg-blue-600 h-9 w-9 rounded-full text-sm flex justify-center items-center text-white">
-                            {user?.fullName?.slice(0, 2)}
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="w-9 h-9">
-                          <img
-                            className="w-full h-full rounded-full"
-                            src={user?.profileImage}
-                            alt="ProfileImage"
-                          />
-                        </div>
-                      )}
-                      <div className="flex flex-col">
-                        <h1 className="hover:underline">{user?.fullName}</h1>
-                        <h2 className="hover:underline">{user?.email}</h2>
-                      </div>
-                    </Link>
-                  </TableCell>
-
-                  <TableCell className="text-center">
-                    <DropdownMenu>
-                      <DropdownMenuTrigger className="bg-blue-400 dark:text-white text-gray-900 text-sm px-3 py-1 rounded-sm font-normal">
-                        <BsThreeDots />
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        {user?.isVerified === "normal" ? (
-                          <DropdownMenuItem>
-                            <div
-                              className="flex gap-1 items-center cursor-pointer"
-                              onClick={() =>
-                                handleVerifyUserProfile(
-                                  user?.email,
-                                  "verified",
-                                  "Verified"
-                                )
-                              }
-                            >
-                              <FcOk className="text-lg" />
-                              Verified
-                            </div>
-                          </DropdownMenuItem>
-                        ) : (
-                          <DropdownMenuItem>
-                            <div
-                              className="flex gap-1 items-center cursor-pointer"
-                              onClick={() =>
-                                handleVerifyUserProfile(
-                                  user?.email,
-                                  "normal",
-                                  "Cencel verification"
-                                )
-                              }
-                            >
-                              <FcHighPriority className="text-lg" />
-                              Cencel Verified
-                            </div>
-                          </DropdownMenuItem>
-                        )}
-
-                        <DropdownMenuItem>
-                          <div
-                            className="flex gap-1 items-center cursor-pointer"
-                            onClick={() => handleDeleteUser(user?._id)}
-                          >
-                            <FcCancel className="text-[19px]" />
-                            Delete
-                          </div>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
-                  </TableCell>
+      {allUsers?.length === 0 ? (
+        <div className="flex w-full flex-col items-center justify-center h-[calc(100vh-104px)]">
+          <FaExclamationCircle className="text-red-500 text-6xl mb-4" />
+          <h1 className="text-2xl font-semibold my-4 dark:text-gray-300">
+            404 - Not Found
+          </h1>
+          <p className="text-gray-600">
+            Not found user with this {searchText}.
+          </p>
+        </div>
+      ) : (
+        <div className="sm:h-[calc(100vh-120px)] h-[calc(100vh-170px)] mt-4 overflow-auto ">
+          {userLoading && (
+            <div className={`flex flex-col gap-4 `}>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((number: number, idx) => {
+                console.log(number);
+                return (
+                  <div className="w-full " key={idx}>
+                    <UserShowLoading />
+                  </div>
+                );
+              })}
+            </div>
+          )}
+          {/* <h1 className="my-2 text-sm">Pending News</h1> */}
+          {!userLoading && (
+            <Table className="z-10 ">
+              {/* <TableCaption>A list of your Pending News.</TableCaption> */}
+              <TableHeader className="bg-white dark:bg-gray-800">
+                <TableRow>
+                  <TableHead>Verification</TableHead>
+                  <TableHead>Author</TableHead>
+                  <TableHead className="text-center">Action</TableHead>
                 </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </div>
+              </TableHeader>
+
+              <TableBody className="">
+                {allUsers?.map((user: ProfileType) => {
+                  return (
+                    <TableRow key={user?._id}>
+                      {/* <TableCell className="">
+                <img
+                  className="w-10 h-8 "
+                  src={news?.thumbnail_url}
+                  alt={news?.title}
+                />
+              </TableCell> */}
+                      <TableCell>
+                        {user?.isVerified === "verified" ? (
+                          <div className="flex items-center gap-2">
+                            <FcApproval className="text-lg" />
+                            Verified
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-2">
+                            <FcCancel className="text-lg" />
+                            Not Verified
+                          </div>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <Link
+                          to={`/profile/${user?.email}`}
+                          className="flex items-center gap-2"
+                        >
+                          {user?.profileImage === null ? (
+                            <div className="">
+                              <div className="font-bold capitalize bg-blue-600 h-9 w-9 rounded-full text-sm flex justify-center items-center text-white">
+                                {user?.fullName?.slice(0, 2)}
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="w-9 h-9">
+                              <img
+                                className="w-full h-full rounded-full"
+                                src={user?.profileImage}
+                                alt="ProfileImage"
+                              />
+                            </div>
+                          )}
+                          <div className="flex flex-col">
+                            <h1 className="hover:underline">
+                              {user?.fullName}
+                            </h1>
+                            <h2 className="hover:underline">{user?.email}</h2>
+                          </div>
+                        </Link>
+                      </TableCell>
+
+                      <TableCell className="text-center">
+                        <DropdownMenu>
+                          <DropdownMenuTrigger className="bg-blue-400 dark:text-white text-gray-900 text-sm px-3 py-1 rounded-sm font-normal">
+                            <BsThreeDots />
+                          </DropdownMenuTrigger>
+                          <DropdownMenuContent>
+                            {user?.isVerified === "normal" ? (
+                              <DropdownMenuItem>
+                                <div
+                                  className="flex gap-1 items-center cursor-pointer"
+                                  onClick={() =>
+                                    handleVerifyUserProfile(
+                                      user?.email,
+                                      "verified",
+                                      "Verified"
+                                    )
+                                  }
+                                >
+                                  <FcOk className="text-lg" />
+                                  Verified
+                                </div>
+                              </DropdownMenuItem>
+                            ) : (
+                              <DropdownMenuItem>
+                                <div
+                                  className="flex gap-1 items-center cursor-pointer"
+                                  onClick={() =>
+                                    handleVerifyUserProfile(
+                                      user?.email,
+                                      "normal",
+                                      "Cencel verification"
+                                    )
+                                  }
+                                >
+                                  <FcHighPriority className="text-lg" />
+                                  Cencel Verified
+                                </div>
+                              </DropdownMenuItem>
+                            )}
+
+                            <DropdownMenuItem>
+                              <div
+                                className="flex gap-1 items-center cursor-pointer"
+                                onClick={() => handleDeleteUser(user?._id)}
+                              >
+                                <FcCancel className="text-[19px]" />
+                                Delete
+                              </div>
+                            </DropdownMenuItem>
+                          </DropdownMenuContent>
+                        </DropdownMenu>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          )}
+        </div>
+      )}
       <div>
         <Pagination>
           <PaginationContent>
