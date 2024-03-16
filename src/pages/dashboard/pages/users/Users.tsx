@@ -40,12 +40,12 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import UserShowLoading from "../../../../helper/Loading/UserShowLoading";
 const Users = () => {
-  const [searchText, setSearchText] = useState<null | string | undefined>("");
+  const [search, setSearch] = useState<null | string | undefined>("");
   const {
     users,
     isLoading: userLoading,
     refetch: usersRefetch,
-  } = useGetAllUsersProfile(searchText);
+  } = useGetAllUsersProfile(search);
   const { refetch: allNewsRefetch } = useFetchNews();
   const allUsers = users?.payload?.userProfiles;
   const { axiosInstance } = useAxios();
@@ -90,11 +90,11 @@ const Users = () => {
   const { handleSubmit, register } = useForm();
 
   const onSubmit = (data: any) => {
-    setSearchText(data?.searchText);
+    setSearch(data?.searchText);
   };
 
   console.log(userLoading);
-  console.log(searchText);
+  console.log(search);
 
   return (
     <div>
@@ -121,9 +121,7 @@ const Users = () => {
           <h1 className="text-2xl font-semibold my-4 dark:text-gray-300">
             404 - Not Found
           </h1>
-          <p className="text-gray-600">
-            Not found user with this {searchText}.
-          </p>
+          <p className="text-gray-600">Not found user with this {search}.</p>
         </div>
       ) : (
         <div className="sm:h-[calc(100vh-120px)] h-[calc(100vh-170px)] mt-4 overflow-auto ">

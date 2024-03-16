@@ -9,7 +9,7 @@ import TotalUsers from "./info/TotalUsers";
 import DashboardNavbar from "../dashboardNavbar/DashboardNavbar";
 
 const Dashboard = () => {
-  const { users } = useGetAllUsersProfile();
+  const { users } = useGetAllUsersProfile("");
   const { newsData } = useFetchNews();
   const { comments } = useFetchAllComments();
   const { reacts } = useFetchAllReacts();
