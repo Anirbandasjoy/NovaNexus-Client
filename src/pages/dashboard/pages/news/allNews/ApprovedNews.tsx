@@ -109,7 +109,7 @@ const ApprovedNews = () => {
                   </Link>
                 </TableCell>
                 <TableCell className="text-blue-600 hover:underline cursor-pointer">
-                  <Link to={`/news-details/${news?._id}`}>Lear More</Link>
+                  <Link to={`/news-details/${news?._id}`}>Learn More</Link>
                 </TableCell>
                 <TableCell className="text-center">
                   <DropdownMenu>

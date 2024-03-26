@@ -8,6 +8,8 @@ import { AuthContext } from "../../contex/AuthProvider";
 import { AuthContextType } from "../Type";
 import { LuBookmarkPlus } from "react-icons/lu";
 import useGetSingleUserProfile from "@/hooks/userProfile/useGetSingleUserProfile";
+import { RiSettings3Line } from "react-icons/ri";
+
 
 interface MenuItemComponentProps {
   children: ReactNode;
@@ -53,6 +55,15 @@ const DropDown = ({ userName }: { userName: string | null | undefined }) => {
                     aria-hidden="true"
                   />
                   Profile
+                </MenuItem>
+              </Menu.Item>
+              <Menu.Item>
+                <MenuItem path={`/settings`}>
+                  <RiSettings3Line
+                    className="mr-2 h-5 w-5 dark:text-white"
+                    aria-hidden="true"
+                  />
+                  Settings
                 </MenuItem>
               </Menu.Item>
               <div className="block sm:hidden">

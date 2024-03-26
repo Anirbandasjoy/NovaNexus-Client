@@ -4,36 +4,36 @@ import {
 } from "react-icons/md";
 import Menu from "./Menu";
 import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import { BiCandles } from "react-icons/bi";
 import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import React, { useContext } from "react";
 import { AuthContext } from "../../contex/AuthProvider";
 import { AuthContextType } from "../../helper/Type";
-import Swal from "sweetalert2";
+
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const SideMenu = () => {
   const { logOut } = useContext(AuthContext as React.Context<AuthContextType>);
   const navigate = useNavigate();
   const handleLogOut = async () => {
     try {
-      await Swal.fire({
-        title: "Are you sure?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Logout",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          await logOut();
-          toast.success("Logout Successfully");
-          navigate("/login");
-          if (location) {
-            localStorage.removeItem("location");
-          }
-        }
-      });
+      await logOut();
+      toast.success("Logout Successfully");
+      navigate("/login");
+      if (location) {
+        localStorage.removeItem("location");
+      }
     } catch (error) {
       console.error("Error during logout:", error);
     }
@@ -60,6 +60,11 @@ const SideMenu = () => {
               path="/dashboard/all-news"
               Icon={MdOutlineSwapCalls}
             />
+            <Menu
+              menuName="Categories"
+              path="/dashboard/categories"
+              Icon={BiCandles}
+            />
 
             <Menu
               menuName="Users"
@@ -75,15 +80,31 @@ const SideMenu = () => {
             />
             {/* <Menu menuName="Logout" path="" Icon={IoLogOutOutline} /> */}
 
-            <div
-              className="flex items-center gap-3 hover:bg-gray-300 dark:hover:bg-gray-800 py-2 pl-3  cursor-pointer"
-              onClick={handleLogOut}
-            >
-              <IoLogOutOutline className="text-gray-700 dark:text-gray-400 text-[18px]" />
-              <h1 className="text-[14px] font-bold text-gray-700 dark:text-gray-400">
-                Logout
-              </h1>
-            </div>
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <div className="flex items-center gap-3 hover:bg-gray-300 dark:hover:bg-gray-800 py-2 pl-3  cursor-pointer">
+                  <IoLogOutOutline className="text-gray-700 dark:text-gray-400 text-[18px]" />
+                  <h1 className="text-[14px] font-bold text-gray-700 dark:text-gray-400">
+                    Logout
+                  </h1>
+                </div>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle className="text-center">
+                    Are you absolutely sure?
+                  </AlertDialogTitle>
+                </AlertDialogHeader>
+                <AlertDialogFooter className=" text-left">
+                  <AlertDialogCancel className="text-center w-full">
+                    No
+                  </AlertDialogCancel>
+                  <AlertDialogAction className="w-full" onClick={handleLogOut}>
+                    Yes
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </div>
       </div>

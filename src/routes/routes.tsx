@@ -16,6 +16,8 @@ import CreatePost from "@/pages/home/middle/CreatePost";
 import BookmarkNews from "@/pages/home/middle/BookmarkNews";
 import AdminRoutes from "./AdminRoutes";
 import Dashboard from "@/pages/dashboard/dashboard/Dashboard";
+import UserSettings from "@/pages/userSettings/UserSettings";
+import Categories from "@/pages/dashboard/pages/categories/Categories";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +46,11 @@ export const router = createBrowserRouter([
           </PribetRoutes>
         ),
       },
+      {
+        path: "settings",
+        element: <UserSettings />,
+      },
+
       {
         path: "edit-post/:id",
         element: (
@@ -92,6 +99,10 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         element: <Settings />,
+      },
+      {
+        path: "categories",
+        element: <Categories />,
       },
       {
         path: "all-news",
