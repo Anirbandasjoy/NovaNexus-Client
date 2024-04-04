@@ -3,7 +3,7 @@
 ### Project Overview
 NovaNexus is a social news feed website. Through which people can share different types of news. You can delete and edit your post. If you want, you can save posts made by others. This website has an admin dashboard which only admin can access. There is an option to manage users and manage posted news from the dashboard. Admin can see all the information through the chart.
 
-![NovaNexus Demo](https://i.ibb.co/YLxXsBw/novanexus-vercel-app-1.png)
+![NovaNexus Demo](https://i.ibb.co/4dH5X2h/demo.png)
 
 #### Visit the live site: [NovaNexus](https://novanexus.vercel.app)
 
