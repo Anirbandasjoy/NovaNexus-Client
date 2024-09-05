@@ -112,7 +112,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="/carrer"
+                    to="/contact"
                     className=" duration-300 font-bold py-2 px-3 text-gray-700 rounded h md:hover:bg-transparent  md:p-0 hover:text-[#d72050] dark:text-gray-300 dark:hover:bg-gray-700  dark:hover:text-[#e66f8f] md:dark:hover:bg-transparent dark:border-gray-700 flex flex-col items-center justify-center"
                   >
                     <BiSolidContact className="text-2xl" />

@@ -18,6 +18,8 @@ import AdminRoutes from "./AdminRoutes";
 import Dashboard from "@/pages/dashboard/dashboard/Dashboard";
 import UserSettings from "@/pages/userSettings/UserSettings";
 import Categories from "@/pages/dashboard/pages/categories/Categories";
+import AboutPage from "@/pages/home/about/AboutPage";
+import ContactPage from "@/pages/home/contact/ContactPage";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +51,15 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         element: <UserSettings />,
+      },
+      {
+        path: "/about",
+        element: <AboutPage />,
+      },
+
+      {
+        path: "/contact",
+        element: <ContactPage />,
       },
 
       {

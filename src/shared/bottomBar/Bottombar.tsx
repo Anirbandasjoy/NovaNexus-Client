@@ -39,9 +39,9 @@ const Bottombar = () => {
         </div>
 
         <div>
-          <NavLink to="/signIn" className="flex flex-col items-center gap-1">
+          <NavLink to="/about" className="flex flex-col items-center gap-1">
             <FaBlog className="text-2xl" />
-            <p className="text-[10px]">Blog</p>
+            <p className="text-[10px]">About</p>
           </NavLink>
         </div>
       </div>

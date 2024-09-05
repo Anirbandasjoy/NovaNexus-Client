@@ -54,6 +54,7 @@ import { FcApproval } from "react-icons/fc";
 import useFetchAllReacts from "@/hooks/react/useFetchAllReacts";
 import likeSound from "../../../assets/audio/like.mp3";
 import useGetSingleNewsReact from "@/hooks/react/useGetSingleNewsReact";
+import TimeAgo from "@/components/timeAgo/TimeAgo";
 
 type Comment = {
   _id: string;
@@ -188,7 +189,7 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                   {news?.profileId?.fullName}
                 </h1>
                 <h2 className="text-xs text-gray-600 dark:text-gray-300">
-                  {formatDate(news?.profileId?.createdAt)}
+                  <TimeAgo date={news?.createdAt || ""} />
                 </h2>
                 {news?.status === "approved" && (
                   <div className="flex gap-1 absolute -right-24 -top-1">

@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { useContext, useState } from "react";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
+import GoogleLoginButton from "./GoogleLogin";
 const schema = yup.object({
   email: yup.string().email().required(),
   password: yup
@@ -85,6 +86,9 @@ const Login = () => {
             </div>
           </div>
           <div className="">
+            <div className="my-4 w-full">
+              <GoogleLoginButton />
+            </div>
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div className="flex items-center flex-col  gap-5">
                 <div className="flex flex-col gap-1 w-full">

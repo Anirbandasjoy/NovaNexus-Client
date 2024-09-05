@@ -25,6 +25,7 @@
     "class-variance-authority": "^0.7.0",
     "clipboard-copy": "^4.0.1",
     "clsx": "^2.1.0",
+    "date-fns": "^3.6.0",
     "emoji-mart": "^5.5.2",
     "emoji-picker-react": "^4.7.10",
     "firebase": "^10.8.0",

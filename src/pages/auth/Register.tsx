@@ -13,6 +13,7 @@ import { updateProfile } from "firebase/auth";
 import { uploadImage } from "../../api";
 import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
 import { useAxios } from "@/hooks/axios/useAxios";
+import GoogleLoginButton from "./GoogleLogin";
 const schema = yup.object({
   fullname: yup.string().required(),
   email: yup.string().email().required(),
@@ -113,6 +114,9 @@ const Register = () => {
             </h1>
           </div>
           <div className="">
+            <div className="my-4 w-full">
+              <GoogleLoginButton />
+            </div>
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div className="flex items-center flex-col  gap-5">
                 <div className="flex flex-col gap-1 w-full">
