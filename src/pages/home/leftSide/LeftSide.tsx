@@ -23,6 +23,7 @@ const LeftSide = ({
   const handleCategoryNews = (id: string) => {
     getCategoryId(id);
   };
+  console.log({ length: categories?.payload?.length });
   return (
     <div className="w-6/12  hidden sm:block overflow-hidden">
       <h1 className="tex-lg bg-gray-300 py-2 dark:bg-gray-800  dark:border dark:border-gray-700 px-2 sm:text-lg dark:text-gray-300 text-center text-gray-700  font-bold  ">
@@ -44,6 +45,19 @@ const LeftSide = ({
           <FcDeployment className="text-[24px] cursor-pointer" />
           <FcFrame className="text-[24px] cursor-pointer" />
           <FcElectricity className="text-[24px] cursor-pointer" />
+          {categories?.payload && categories?.payload?.length > 10 ? (
+            <>
+              {Array.from({ length: categories?.payload?.length - 10 }).map(
+                (_, index) => (
+                  <div key={index}>
+                    <FcAdvance className="text-[24px] cursor-pointer" />
+                  </div>
+                )
+              )}
+            </>
+          ) : (
+            ""
+          )}
         </div>
         <div className="space-y-4 w-full">
           {isLoading && (

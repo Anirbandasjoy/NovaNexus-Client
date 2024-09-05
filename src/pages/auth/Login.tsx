@@ -11,6 +11,15 @@ import { useContext, useState } from "react";
 import { FaArrowAltCircleLeft } from "react-icons/fa";
 import { AiTwotoneEye, AiTwotoneEyeInvisible } from "react-icons/ai";
 import GoogleLoginButton from "./GoogleLogin";
+import { MdShowChart } from "react-icons/md";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Input } from "@/components/ui/input";
 const schema = yup.object({
   email: yup.string().email().required(),
   password: yup
@@ -86,9 +95,44 @@ const Login = () => {
             </div>
           </div>
           <div className="">
-            <div className="my-4 w-full">
-              <GoogleLoginButton />
+            <div className="flex items-center gap-3">
+              <div className="my-4 w-full">
+                <GoogleLoginButton />
+              </div>
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <div className="py-2  h-10 px-3 w-full rounded-md bg-transparent border-2 text-gray-600  flex items-center justify-center gap-1 cursor-pointer">
+                    <MdShowChart className="text-xl" />
+                    <span className="font-bold">Show Creadential</span>
+                  </div>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="bg-gray-200">
+                  <h1 className="text-center font-medium text-xl text-gray-600">
+                    Creadential
+                  </h1>
+                  <div className="space-y-4">
+                    <div className="flex flex-col gap-1">
+                      <label className="text-sm" htmlFor="email">
+                        Admin Email
+                      </label>
+                      <Input value="joy@gmail.com" />
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <label className="text-sm" htmlFor="password">
+                        Admin password
+                      </label>
+                      <Input value="12345A@" />
+                    </div>
+                  </div>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel className="bg-gray-700 text-white hover:bg-gray-800 hover:text-white">
+                      Close
+                    </AlertDialogCancel>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
+
             <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
               <div className="flex items-center flex-col  gap-5">
                 <div className="flex flex-col gap-1 w-full">
@@ -141,6 +185,7 @@ const Login = () => {
                   <BsFillSendArrowDownFill />
                 </button>
               )}
+
               <p className="dark:text-gray-400">
                 Not Register?please{" "}
                 <Link to="/register" className="text-red-500">
