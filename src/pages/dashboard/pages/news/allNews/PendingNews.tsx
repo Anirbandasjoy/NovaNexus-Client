@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Table,
   TableBody,
@@ -24,12 +25,12 @@ import { useEffect, useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 import useUpdateStatus from "@/hooks/news/useUpdateStatus";
 
-const PendingNews = () => {
+const PendingNews = ({ news }: { news: any }) => {
   const { newsData } = useFetchNews();
   const { handleUpdateStatus } = useUpdateStatus();
   const { handleDeleteNews } = useDeleteNews();
   const [pendingNews, setPendingNews] = useState([]);
-  const allNewsData = newsData?.payload;
+  const allNewsData = news || newsData?.payload;
   const handleApprovedNews = async (id?: string | undefined) => {
     if (!id) return;
     await handleUpdateStatus(id, "approved");

@@ -20,6 +20,7 @@ import UserSettings from "@/pages/userSettings/UserSettings";
 import Categories from "@/pages/dashboard/pages/categories/Categories";
 import AboutPage from "@/pages/home/about/AboutPage";
 import ContactPage from "@/pages/home/contact/ContactPage";
+import CategoryPage from "@/pages/dashboard/category/CategoryPage";
 
 export const router = createBrowserRouter([
   {
@@ -110,6 +111,10 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         element: <Settings />,
+      },
+      {
+        path: "categories",
+        element: <CategoryPage />,
       },
       {
         path: "categories",

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Table,
   TableBody,
@@ -23,11 +24,11 @@ import { AiOutlineCheckCircle } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { MdErrorOutline } from "react-icons/md";
 
-const ApprovedNews = () => {
+const ApprovedNews = ({ news }: { news: any }) => {
   const { newsData } = useFetchNews();
   const { handleDeleteNews } = useDeleteNews();
   const [approvedNews, setApprovedNews] = useState([]);
-  const allNewsData = newsData?.payload;
+  const allNewsData = news || newsData?.payload;
 
   const deleteNews = async (id?: string) => {
     if (!id) return;
