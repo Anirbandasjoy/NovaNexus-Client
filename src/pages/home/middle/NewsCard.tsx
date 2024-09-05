@@ -194,7 +194,6 @@ const NewsCard = ({ news }: { news?: NewsType }) => {
                 {news?.status === "approved" && (
                   <div className="flex gap-1 absolute -right-24 -top-1">
                     <AiOutlineCheckCircle className="text-red-500 text-[14px]" />
-                    <h1 className="text-xs text-red-500">Verifed News</h1>
                   </div>
                 )}
               </div>
