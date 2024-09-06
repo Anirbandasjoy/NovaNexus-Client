@@ -51,7 +51,9 @@ const GoogleLoginButton = () => {
       onClick={handleGoogleLogin}
     >
       <FcGoogle className="w-6 h-6 mr-2" />
-      <span className="text-gray-600 font-medium">Sign in with Google</span>
+      <span className="text-gray-600 font-medium sm:text-sm text-xs text-nowrap">
+        Sign in Google
+      </span>
     </button>
   );
 };

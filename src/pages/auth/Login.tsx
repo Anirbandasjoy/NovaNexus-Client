@@ -103,7 +103,9 @@ const Login = () => {
                 <AlertDialogTrigger asChild>
                   <div className="py-2  h-10 px-3 w-full rounded-md bg-transparent border-2 text-gray-600  flex items-center justify-center gap-1 cursor-pointer">
                     <MdShowChart className="text-xl" />
-                    <span className="font-bold">Show Creadential</span>
+                    <span className="font-bold sm:text-sm text-xs text-nowrap">
+                      Show Creadential
+                    </span>
                   </div>
                 </AlertDialogTrigger>
                 <AlertDialogContent className="bg-gray-200">
